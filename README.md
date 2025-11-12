@@ -1,602 +1,825 @@
-# Candidate Compliance Tracker
+# 🎯 Candidate Compliance Tracker
 
-A full-stack application for tracking candidate credentials and compliance with automatic expiry reminders and email notifications.
+A comprehensive full-stack web application for managing candidate credentials, certifications, and compliance documents with automatic expiry tracking, email reminders, and a modern dashboard interface.
 
-## 🚀 Tech Stack
+![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+
+---
+
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Technology Stack](#-technology-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Running the Application](#-running-the-application)
+- [API Documentation](#-api-documentation)
+- [Authentication & Authorization](#-authentication--authorization)
+- [Database Schema](#-database-schema)
+- [Email Configuration](#-email-configuration)
+- [Project Structure](#-project-structure)
+- [Usage Guide](#-usage-guide)
+- [Deployment](#-deployment)
+- [Testing](#-testing)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## 🎯 Overview
+
+**Candidate Compliance Tracker** is designed to help organizations efficiently manage and track candidate credentials, certifications, and compliance documents. The system automatically monitors expiry dates, sends proactive email reminders, and provides a comprehensive dashboard for credential lifecycle management.
+
+### Key Capabilities
+
+- ✅ **Credential Management**: Full CRUD operations for candidate credentials
+- ✅ **Automatic Status Tracking**: Real-time status calculation (Active/Expiring Soon/Expired)
+- ✅ **Email Reminders**: Automated reminders at 30, 14, and 7 days before expiry
+- ✅ **Role-Based Access Control**: Admin and Recruiter roles with different permissions
+- ✅ **Document Management**: Upload and manage credential documents (PDF/DOC)
+- ✅ **Dashboard Analytics**: Visual statistics and charts for credential overview
+- ✅ **Export Functionality**: CSV export for credential data
+- ✅ **Responsive Design**: Modern, mobile-friendly interface
+
+---
+
+## ✨ Features
+
+### Backend Features
+
+- **RESTful API** built with Laravel 12
+- **Laravel Sanctum** for API token authentication
+- **Role-based access control** (Admin/Recruiter)
+- **Automatic status calculation** based on expiry dates
+- **Scheduled email reminders** (30, 14, 7 days before expiry)
+- **Daily summary emails** for administrators
+- **File upload handling** for credential documents
+- **Pagination** for large datasets
+- **Comprehensive validation** with Form Requests
+- **CORS configuration** for frontend integration
+
+### Frontend Features
+
+- **Modern React Dashboard** with Tailwind CSS
+- **Real-time credential status** visualization
+- **Interactive charts** (Status distribution, Credentials by type)
+- **Advanced filtering** and search functionality
+- **Quick statistics** cards
+- **Modal-based forms** for credential management
+- **CSV export** functionality
+- **Responsive design** for all devices
+- **Token-based authentication** with secure storage
+- **Protected routes** with automatic redirects
+
+---
+
+## 🛠️ Technology Stack
 
 ### Backend
-- **Laravel 12** - PHP Framework
-- **MySQL** - Database
-- **Laravel Sanctum** - API Authentication
-- **Laravel Mail** - Email Notifications
+- **Framework**: Laravel 12
+- **Language**: PHP 8.2+
+- **Database**: SQLite (development) / MySQL (production)
+- **Authentication**: Laravel Sanctum
+- **Email**: Laravel Mail with Markdown templates
+- **Scheduling**: Laravel Task Scheduler
+- **Validation**: Laravel Form Requests
 
 ### Frontend
-- **React 19** - UI Library
-- **Vite** - Build Tool
-- **Tailwind CSS** - Styling
-- **Axios** - HTTP Client
-- **React Router** - Routing
-- **React CSV** - CSV Export
+- **Framework**: React 19
+- **Build Tool**: Vite 7
+- **Styling**: Tailwind CSS 3.4
+- **HTTP Client**: Axios
+- **Routing**: React Router DOM 7
+- **Export**: React CSV
+- **State Management**: React Context API
 
-## 📁 Project Structure
+---
 
-```
-candidate-compliance-tracker/
-├── backend/          # Laravel API
-│   ├── app/
-│   │   ├── Http/
-│   │   │   └── Controllers/
-│   │   │       └── Api/
-│   │   │           └── CredentialController.php
-│   │   ├── Mail/
-│   │   │   ├── CredentialExpiryReminder.php
-│   │   │   └── CredentialExpirySummary.php
-│   │   ├── Models/
-│   │   │   ├── User.php
-│   │   │   └── Credential.php
-│   │   └── Console/
-│   │       └── Commands/
-│   │           ├── SendCredentialReminders.php
-│   │           └── SendCredentialSummary.php
-│   ├── database/
-│   │   ├── migrations/
-│   │   └── seeders/
-│   ├── routes/
-│   │   └── api.php
-│   └── resources/
-│       └── views/
-│           └── emails/
-│               ├── credential-expiry-reminder.blade.php
-│               └── credential-expiry-summary.blade.php
-└── frontend/         # React App
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── hooks/
-    │   └── config/
-    └── package.json
-```
+## 📦 Prerequisites
 
-## 🛠️ Setup Instructions
+Before you begin, ensure you have the following installed:
 
-### Prerequisites
+- **PHP** >= 8.2 with extensions:
+  - BCMath
+  - Ctype
+  - cURL
+  - DOM
+  - Fileinfo
+  - JSON
+  - Mbstring
+  - OpenSSL
+  - PCRE
+  - PDO
+  - Tokenizer
+  - XML
+- **Composer** >= 2.0
+- **Node.js** >= 18.0
+- **npm** >= 9.0
+- **Git**
+- **MySQL** (for production) or **SQLite** (for development)
 
-- PHP 8.2 or higher
-- Composer
-- Node.js 18+ and npm
-- MySQL 8.0+
-- Git
+---
 
-### Backend Setup
+## 🚀 Installation
 
-1. **Navigate to backend directory:**
-   ```bash
-   cd backend
-   ```
-
-2. **Install PHP dependencies:**
-   ```bash
-   composer install
-   ```
-
-3. **Copy environment file:**
-   ```bash
-   cp .env.example .env
-   ```
-
-4. **Generate application key:**
-   ```bash
-   php artisan key:generate
-   ```
-
-5. **Configure database in `.env`:**
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=your_database_name
-   DB_USERNAME=your_username
-   DB_PASSWORD=your_password
-   ```
-
-6. **Configure mail settings in `.env`:**
-   ```env
-   # For Mailtrap (testing)
-   MAIL_MAILER=smtp
-   MAIL_HOST=smtp.mailtrap.io
-   MAIL_PORT=2525
-   MAIL_USERNAME=your_mailtrap_username
-   MAIL_PASSWORD=your_mailtrap_password
-   MAIL_ENCRYPTION=tls
-   MAIL_FROM_ADDRESS="noreply@example.com"
-   MAIL_FROM_NAME="Laravel"
-
-   # Or use log driver for local testing
-   # MAIL_MAILER=log
-   ```
-
-7. **Configure frontend URL for CORS:**
-   ```env
-   FRONTEND_URL=http://localhost:5173
-   ```
-
-8. **Run database migrations:**
-   ```bash
-   php artisan migrate
-   ```
-
-9. **Seed the database:**
-   ```bash
-   php artisan db:seed
-   ```
-
-   For test email data:
-   ```bash
-   php artisan db:seed --class=TestEmailSeeder
-   ```
-
-10. **Start the Laravel development server:**
-    ```bash
-    php artisan serve
-    ```
-    The API will be available at `http://localhost:8000`
-
-### Frontend Setup
-
-1. **Navigate to frontend directory:**
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure API base URL (optional):**
-   Create `.env` file in frontend directory:
-   ```env
-   VITE_API_BASE_URL=http://localhost:8000/api
-   ```
-
-4. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-   The frontend will be available at `http://localhost:5173`
-
-## 📊 Database Migrations
-
-### Run Migrations
+### Step 1: Clone the Repository
 
 ```bash
+git clone https://github.com/Jim-devENG/candidate-compliance-tracker.git
+cd candidate-compliance-tracker
+```
+
+### Step 2: Backend Setup
+
+```bash
+# Navigate to backend directory
 cd backend
+
+# Install PHP dependencies
+composer install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
+# Create database (SQLite for development)
+touch database/database.sqlite
+
+# Run migrations
 php artisan migrate
+
+# Create storage symlink
+php artisan storage:link
 ```
 
-### Migration Files
-
-1. **`0001_01_01_000000_create_users_table.php`**
-   - Creates users table with basic fields
-   - Includes password reset tokens and sessions tables
-
-2. **`2025_11_07_220008_add_role_to_users_table.php`**
-   - Adds `role` field to users table
-   - Enum: `['admin', 'recruiter']`
-   - Default: `'recruiter'`
-
-3. **`2025_11_07_220122_create_credentials_table.php`**
-   - Creates credentials table
-   - Foreign key to users table
-   - Fields: candidate_name, position, credential_type, issue_date, expiry_date, email, status
-
-### Rollback Migrations
+### Step 3: Frontend Setup
 
 ```bash
-php artisan migrate:rollback
+# Navigate to frontend directory (from project root)
+cd ../frontend
+
+# Install Node dependencies
+npm install
 ```
 
-### Fresh Migration (Drops all tables)
+### Step 4: Configure Environment
 
-```bash
-php artisan migrate:fresh
-php artisan db:seed
-```
-
-## 🔐 Environment Variables
-
-### Backend `.env` Configuration
+Edit `backend/.env` file:
 
 ```env
-# Application
-APP_NAME=Laravel
+APP_NAME="Candidate Compliance Tracker"
 APP_ENV=local
-APP_KEY=base64:...
+APP_KEY=base64:... (generated by key:generate)
 APP_DEBUG=true
 APP_URL=http://localhost:8000
 
-# Database
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=your_database_name
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database/database.sqlite
 
-# Mail Configuration
+# For production, use MySQL:
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=your_database
+# DB_USERNAME=your_username
+# DB_PASSWORD=your_password
+
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io
 MAIL_PORT=2525
 MAIL_USERNAME=your_mailtrap_username
 MAIL_PASSWORD=your_mailtrap_password
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="noreply@example.com"
+MAIL_FROM_ADDRESS=noreply@example.com
 MAIL_FROM_NAME="${APP_NAME}"
-
-# Frontend URL for CORS
-FRONTEND_URL=http://localhost:5173
-
-# Session
-SESSION_DRIVER=database
-SESSION_LIFETIME=120
-
-# Cache
-CACHE_STORE=database
-
-# Queue
-QUEUE_CONNECTION=database
 ```
 
-### Frontend `.env` Configuration (Optional)
+---
+
+## ⚙️ Configuration
+
+### Database Configuration
+
+#### SQLite (Development)
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/backend/database/database.sqlite
+```
+
+#### MySQL (Production)
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### Email Configuration
+
+#### Using Mailtrap (Testing)
+1. Sign up at [Mailtrap.io](https://mailtrap.io)
+2. Create an inbox
+3. Copy SMTP credentials
+4. Update `.env` file:
 
 ```env
-VITE_API_BASE_URL=http://localhost:8000/api
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_ENCRYPTION=tls
 ```
 
-## 📡 API Endpoints
+#### Using Production SMTP
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your_email@gmail.com
+MAIL_FROM_NAME="Candidate Compliance Tracker"
+```
+
+### CORS Configuration
+
+The backend is pre-configured to accept requests from `http://localhost:5173` (Vite default). For production, update `backend/config/cors.php`:
+
+```php
+'allowed_origins' => [
+    'http://localhost:5173',
+    'https://your-production-domain.com',
+],
+```
+
+---
+
+## 🏃 Running the Application
+
+### Development Mode
+
+#### Terminal 1: Backend Server
+```bash
+cd backend
+php artisan serve
+```
+Backend will run on `http://localhost:8000`
+
+#### Terminal 2: Frontend Server
+```bash
+cd frontend
+npm run dev
+```
+Frontend will run on `http://localhost:5173`
+
+### Production Build
+
+#### Build Frontend
+```bash
+cd frontend
+npm run build
+```
+
+#### Serve Backend
+```bash
+cd backend
+php artisan serve
+# Or configure with your web server (Apache/Nginx)
+```
+
+### Scheduled Tasks (Email Reminders)
+
+For production, add this to your crontab:
+
+```bash
+* * * * * cd /path-to-project/backend && php artisan schedule:run >> /dev/null 2>&1
+```
+
+Or use Laravel's task scheduler with your web server's cron configuration.
+
+---
+
+## 📡 API Documentation
 
 ### Base URL
 ```
 http://localhost:8000/api
 ```
 
-### Authentication
-All endpoints use Laravel Sanctum for authentication (optional for now).
+### Authentication Endpoints
 
-### Endpoints
+#### Register
+```http
+POST /api/register
+Content-Type: application/json
 
-#### Health Check
-```
-GET /api/health
-```
-**Response:**
-```json
 {
-  "status": "ok"
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "password_confirmation": "password123",
+  "role": "admin",
+  "avatar": "file" // optional
 }
 ```
 
-#### Credentials
+#### Login
+```http
+POST /api/login
+Content-Type: application/json
 
-**List All Credentials**
-```
-GET /api/credentials
-```
-**Query Parameters:**
-- `name` (optional) - Filter by candidate name
-- `type` (optional) - Filter by credential type
-
-**Response:**
-```json
 {
-  "data": [
-    {
-      "id": 1,
-      "user_id": 1,
-      "user": {
-        "id": 1,
-        "name": "Recruiter User",
-        "email": "recruiter@example.com"
-      },
-      "candidate_name": "John Doe",
-      "position": "Software Engineer",
-      "credential_type": "Professional License",
-      "issue_date": "2024-01-15",
-      "expiry_date": "2025-01-15",
-      "email": "john@example.com",
-      "status": "active",
-      "status_color": "green",
-      "created_at": "2024-11-07T22:00:00.000000Z",
-      "updated_at": "2024-11-07T22:00:00.000000Z"
-    }
-  ],
-  "count": 1
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+Response:
+{
+  "token": "1|...",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "admin",
+    "avatar_url": "http://localhost:8000/storage/..."
+  }
 }
 ```
 
-**Get Single Credential**
+#### Get Authenticated User
+```http
+GET /api/user
+Authorization: Bearer {token}
 ```
+
+#### Logout
+```http
+POST /api/logout
+Authorization: Bearer {token}
+```
+
+### Credential Endpoints
+
+#### List Credentials
+```http
+GET /api/credentials?page=1&per_page=10&status=active&search=keyword
+Authorization: Bearer {token}
+```
+
+#### Get Single Credential
+```http
 GET /api/credentials/{id}
+Authorization: Bearer {token}
 ```
 
-**Create Credential**
-```
+#### Create Credential (Admin Only)
+```http
 POST /api/credentials
-```
-**Request Body:**
-```json
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
 {
-  "candidate_name": "Jane Doe",
-  "position": "Nurse",
-  "credential_type": "Professional License",
-  "issue_date": "2024-01-01",
-  "expiry_date": "2025-01-01",
-  "email": "jane@example.com"
+  "candidate_name": "Jane Smith",
+  "position": "Software Engineer",
+  "credential_type": "AWS Certification",
+  "email": "jane@example.com",
+  "issue_date": "2024-01-15",
+  "expiry_date": "2025-01-15",
+  "status": "active", // optional, auto-calculated if not provided
+  "document": "file" // optional, PDF/DOC/DOCX
 }
 ```
 
-**Update Credential**
-```
+#### Update Credential (Admin Only)
+```http
 PUT /api/credentials/{id}
-```
-**Request Body:** (all fields optional)
-```json
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
 {
-  "candidate_name": "Jane Doe Updated",
-  "expiry_date": "2026-01-01"
+  "candidate_name": "Jane Smith Updated",
+  "status": "", // empty string to auto-calculate
+  "document": "file" // optional
 }
 ```
 
-**Delete Credential**
-```
+#### Delete Credential (Admin Only)
+```http
 DELETE /api/credentials/{id}
+Authorization: Bearer {token}
 ```
+
+### Email Endpoints (Admin Only)
+
+#### Send Reminder Emails
+```http
+POST /api/emails/send-reminders
+Authorization: Bearer {token}
+```
+
+#### Send Summary Email
+```http
+POST /api/emails/send-summary
+Authorization: Bearer {token}
+```
+
+---
+
+## 🔐 Authentication & Authorization
+
+### User Roles
+
+#### Admin
+- ✅ Full CRUD access to all credentials
+- ✅ Can create, edit, and delete any credential
+- ✅ Can view all credentials
+- ✅ Can trigger email reminders and summaries
+- ✅ Receives daily summary emails
+
+#### Recruiter
+- ✅ Can view their own credentials only
+- ✅ Can export credentials (CSV)
+- ❌ Cannot create, edit, or delete credentials
+- ✅ Receives reminder emails for their credentials
+
+### Authentication Flow
+
+1. User registers/logs in via `/api/register` or `/api/login`
+2. Backend returns an authentication token
+3. Frontend stores token in `localStorage`
+4. All subsequent requests include token in `Authorization: Bearer {token}` header
+5. Backend validates token using Laravel Sanctum middleware
+
+### Protected Routes
+
+All credential routes require authentication. Admin-only routes are protected by `role.admin` middleware.
+
+---
+
+## 🗄️ Database Schema
+
+### Users Table
+```sql
+- id (bigint, primary key)
+- name (string)
+- email (string, unique)
+- email_verified_at (timestamp, nullable)
+- password (string)
+- role (string: 'admin' or 'recruiter')
+- avatar_path (string, nullable)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Credentials Table
+```sql
+- id (bigint, primary key)
+- candidate_name (string)
+- position (string)
+- credential_type (string)
+- email (string)
+- issue_date (date)
+- expiry_date (date)
+- status (string, nullable: 'active', 'expired', 'expiring_soon', 'pending')
+- document_path (string, nullable)
+- user_id (bigint, foreign key -> users.id)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Personal Access Tokens Table (Laravel Sanctum)
+```sql
+- id (bigint, primary key)
+- tokenable_type (string)
+- tokenable_id (bigint)
+- name (string)
+- token (string, unique)
+- abilities (text, nullable)
+- last_used_at (timestamp, nullable)
+- expires_at (timestamp, nullable)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+---
+
+## 📧 Email Configuration
+
+### Email Reminders
+
+The system automatically sends email reminders at:
+- **30 days** before expiry
+- **14 days** before expiry
+- **7 days** before expiry
+
+### Daily Summary
+
+Administrators receive a daily summary email containing:
+- Total credentials
+- Expiring credentials (next 7 days)
+- Expired credentials
+- Compliance statistics
+
+### Email Templates
+
+- **Reminder Email**: `resources/views/emails/credential-expiry-reminder.blade.php`
+- **Summary Email**: `resources/views/emails/credential-expiry-summary.blade.php`
+
+Both templates use Laravel Markdown for beautiful, responsive emails.
+
+### Testing Emails
+
+Use the test command:
+```bash
+cd backend
+php artisan test:mailtrap
+```
+
+Or manually trigger emails via API:
+```http
+POST /api/emails/send-reminders
+POST /api/emails/send-summary
+```
+
+---
+
+## 📁 Project Structure
+
+```
+candidate-compliance-tracker/
+├── backend/                    # Laravel API
+│   ├── app/
+│   │   ├── Console/
+│   │   │   └── Commands/       # Scheduled commands
+│   │   ├── Http/
+│   │   │   ├── Controllers/
+│   │   │   │   └── Api/         # API controllers
+│   │   │   ├── Middleware/     # Custom middleware
+│   │   │   └── Requests/       # Form validation
+│   │   ├── Mail/               # Email classes
+│   │   └── Models/             # Eloquent models
+│   ├── database/
+│   │   ├── migrations/          # Database migrations
+│   │   └── seeders/            # Database seeders
+│   ├── resources/
+│   │   └── views/
+│   │       └── emails/          # Email templates
+│   ├── routes/
+│   │   └── api.php             # API routes
+│   └── storage/
+│       └── app/
+│           └── public/         # Public storage (documents)
+│
+├── frontend/                    # React Application
+│   ├── src/
+│   │   ├── components/         # React components
+│   │   │   ├── Layout/         # Layout components
+│   │   │   └── ...             # Other components
+│   │   ├── contexts/           # React Context (Auth)
+│   │   ├── hooks/              # Custom hooks
+│   │   ├── pages/              # Page components
+│   │   └── config/             # Configuration files
+│   └── public/                # Static assets
+│
+└── README.md                   # This file
+```
+
+---
+
+## 📖 Usage Guide
+
+### Creating a Credential
+
+1. Log in as an **Admin** user
+2. Click **"Add New Credential"** button
+3. Fill in the form:
+   - Candidate Name (required)
+   - Position (required)
+   - Credential Type (required)
+   - Email (required)
+   - Issue Date (required)
+   - Expiry Date (required)
+   - Status (optional - auto-calculated if not provided)
+   - Document (optional - PDF/DOC/DOCX)
+4. Click **"Create"**
+
+### Viewing Credentials
+
+- **Admins**: See all credentials
+- **Recruiters**: See only their own credentials
+- Use filters to narrow down results
+- Use search to find specific credentials
+
+### Editing a Credential
+
+1. Click the **Edit** button (Admin only)
+2. Modify the fields
+3. Click **"Update"**
+
+### Deleting a Credential
+
+1. Click the **Delete** button (Admin only)
+2. Confirm the deletion
+
+### Exporting Credentials
+
+1. Use the **Export to CSV** button
+2. File will be downloaded automatically
 
 ### Status Calculation
 
 Status is automatically calculated based on expiry date:
-- **Active** → expiry > 30 days from today (green)
-- **Expiring Soon** → expiry ≤ 30 days from today (yellow)
-- **Expired** → expiry ≤ today (red)
-- **Pending** → no expiry date (gray)
+- **Active**: Expiry date is more than 30 days away
+- **Expiring Soon**: Expiry date is between 7-30 days away
+- **Expired**: Expiry date has passed
+- **Pending**: Can be manually set
 
-## 🎨 Frontend Features
+You can override automatic calculation by manually setting the status.
 
-### Dashboard
-- **Status Cards**: Color-coded cards showing Active, Expiring Soon, Expired, and Total counts
-- **Notification Banner**: Shows count of credentials expiring within 30 days
-- **Data Table**: Displays all credentials with sorting and filtering
-- **Search & Filter**: Filter by candidate name or credential type
-- **CRUD Operations**: Add, Edit, Delete credentials via modals
-- **CSV Export**: Download credentials as CSV file
-- **Status Tags**: Color-coded status badges with tooltips showing days until expiry
+---
 
-### Components
-- **Layout**: Sidebar navigation and topbar with "Add New" button
-- **StatusCard**: Color-coded status cards
-- **StatusTag**: Status badges with hover tooltips
-- **CredentialForm**: Modal form for creating/editing credentials
-- **NotificationBanner**: Alert banner for expiring credentials
-
-## 📧 Email Features
-
-### Scheduled Jobs
-
-The application includes scheduled jobs for email reminders:
-
-1. **Daily Summary Email** (8:00 AM)
-   - Sends summary to Admin users
-   - Lists all credentials expiring within 30 days
-
-2. **Reminder Emails** (9:00 AM)
-   - Sends reminders at 30, 14, and 7 days before expiry
-   - Sent to credential managers
-
-### Email Templates
-
-1. **Credential Expiry Reminder**
-   - Sent to credential managers
-   - Includes credential details and days until expiry
-   - Urgent warning for credentials expiring in ≤7 days
-
-2. **Daily Credential Expiry Summary**
-   - Sent to Admin users
-   - Table of all credentials expiring within 30 days
-   - Status indicators (Urgent, Warning, Notice)
-
-### Testing Emails
-
-**Seed test data:**
-```bash
-php artisan db:seed --class=TestEmailSeeder
-```
-
-**Test via Tinker:**
-```bash
-php artisan tinker < test-emails.php
-```
-
-**Or manually in Tinker:**
-```php
-use App\Mail\CredentialExpiryReminder;
-use App\Models\Credential;
-use Illuminate\Support\Facades\Mail;
-
-$credential = Credential::where('candidate_name', 'like', '%30 Days%')->first();
-Mail::to($credential->user->email)->send(new CredentialExpiryReminder($credential, 30));
-```
-
-**Test commands:**
-```bash
-# Test reminder emails
-php artisan credentials:send-reminders
-
-# Test summary email
-php artisan credentials:send-summary
-```
-
-## 🗄️ Database Seeding
-
-### Default Seeder
-
-```bash
-php artisan db:seed
-```
-
-Creates:
-- 1 Admin user (admin@example.com)
-- 1 Recruiter user (recruiter@example.com)
-- 10 sample credentials with mixed expiry dates
-
-### Test Email Seeder
-
-```bash
-php artisan db:seed --class=TestEmailSeeder
-```
-
-Creates test credentials with specific expiry dates:
-- 30 days
-- 14 days
-- 7 days
-- 5 days
-- 20 days
-
-### Fresh Seed (Drops and recreates)
-
-```bash
-php artisan migrate:fresh --seed
-```
-
-## 🖼️ Screenshots
-
-### Dashboard Overview
-![Dashboard](screenshots/dashboard.png)
-*Main dashboard showing status cards, notification banner, and credentials table*
-
-### Add Credential Modal
-![Add Credential](screenshots/add-credential.png)
-*Modal form for adding new credentials*
-
-### Status Tags with Tooltips
-![Status Tags](screenshots/status-tags.png)
-*Color-coded status tags with hover tooltips showing days until expiry*
-
-### Email Reminder
-![Email Reminder](screenshots/email-reminder.png)
-*Sample email reminder for expiring credentials*
-
-### Email Summary
-![Email Summary](screenshots/email-summary.png)
-*Daily summary email sent to Admin users*
-
-> **Note:** Screenshots should be taken from the running application at `http://localhost:5173` and `http://localhost:8000`. Place them in a `screenshots/` directory in the project root.
-
-## 🚀 Deployment
+## 🚢 Deployment
 
 ### Backend Deployment
 
-1. **Set environment to production:**
+1. **Set up production environment variables**:
    ```env
    APP_ENV=production
    APP_DEBUG=false
+   DB_CONNECTION=mysql
+   # ... other production settings
    ```
 
-2. **Optimize for production:**
+2. **Install dependencies**:
+   ```bash
+   composer install --optimize-autoloader --no-dev
+   ```
+
+3. **Run migrations**:
+   ```bash
+   php artisan migrate --force
+   ```
+
+4. **Optimize application**:
    ```bash
    php artisan config:cache
    php artisan route:cache
    php artisan view:cache
-   php artisan optimize
    ```
 
-3. **Set up scheduled tasks:**
-   Add to crontab:
+5. **Set up scheduled tasks** (cron):
    ```bash
    * * * * * cd /path-to-project/backend && php artisan schedule:run >> /dev/null 2>&1
    ```
 
 ### Frontend Deployment
 
-1. **Build for production:**
+1. **Build for production**:
    ```bash
    npm run build
    ```
 
-2. **Deploy the `dist/` folder** to your web server (Nginx, Apache, etc.)
+2. **Deploy the `dist/` folder** to your web server
 
-3. **Configure API base URL** in production environment
+3. **Configure API URL** in production environment
+
+### Environment Variables
+
+Ensure all production environment variables are set:
+- Database credentials
+- Mail configuration
+- APP_URL
+- APP_KEY
+- CORS allowed origins
+
+---
 
 ## 🧪 Testing
 
 ### Backend Tests
-
 ```bash
 cd backend
 php artisan test
 ```
 
-### Manual Testing
+### Frontend Tests
+```bash
+cd frontend
+npm test
+```
 
-1. **API Testing:**
-   - Use Postman or curl to test endpoints
-   - Test CRUD operations
-   - Test filtering and search
-
-2. **Email Testing:**
-   - Configure Mailtrap for testing
-   - Run test email seeder
-   - Test email commands
-
-3. **Frontend Testing:**
-   - Test all CRUD operations
-   - Test filtering and search
-   - Test CSV export
-   - Test status calculations
-
-## 📝 Additional Documentation
-
-- **Email Testing Guide**: `backend/README-EMAIL-TESTING.md`
-- **API Documentation**: See API Endpoints section above
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📄 License
-
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## 🆘 Troubleshooting
-
-### Common Issues
-
-**Database Connection Error:**
-- Verify MySQL is running
-- Check `.env` database credentials
-- Ensure database exists
-
-**CORS Errors:**
-- Verify `FRONTEND_URL` in `.env`
-- Check `config/cors.php` configuration
-
-**Email Not Sending:**
-- Check mail configuration in `.env`
-- Verify Mailtrap credentials
-- Check `storage/logs/laravel.log` for errors
-
-**Frontend API Errors:**
-- Verify backend is running on port 8000
-- Check API base URL configuration
-- Verify CORS settings
-
-## 📞 Support
-
-For issues and questions, please open an issue on the repository.
+### Email Testing
+```bash
+cd backend
+php artisan test:mailtrap
+```
 
 ---
 
-**Built with ❤️ using Laravel and React**
+## 🔧 Troubleshooting
 
+### Common Issues
+
+#### 1. Database Connection Error
+- Check `.env` file database configuration
+- Ensure database file exists (SQLite) or database is created (MySQL)
+- Verify database credentials
+
+#### 2. Storage Link Error
+```bash
+cd backend
+php artisan storage:link
+```
+
+#### 3. CORS Error
+- Check `backend/config/cors.php`
+- Verify frontend URL is in allowed origins
+- Clear config cache: `php artisan config:clear`
+
+#### 4. Email Not Sending
+- Verify email configuration in `.env`
+- Check Mailtrap inbox (if using Mailtrap)
+- Check Laravel logs: `backend/storage/logs/laravel.log`
+
+#### 5. Token Authentication Failing
+- Clear config cache: `php artisan config:clear`
+- Verify Sanctum is properly installed
+- Check token is being sent in Authorization header
+
+#### 6. Document Upload Failing
+- Ensure `storage/app/public` directory exists
+- Run `php artisan storage:link`
+- Check file permissions on storage directory
+- Verify file size is under 5MB
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Coding Standards
+
+- Follow PSR-12 coding standards for PHP
+- Use ESLint for JavaScript/React code
+- Write meaningful commit messages
+- Add comments for complex logic
+- Update documentation for new features
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Authors
+
+- **Jim-devENG** - [GitHub](https://github.com/Jim-devENG)
+
+---
+
+## 🙏 Acknowledgments
+
+- Laravel Framework
+- React Team
+- Tailwind CSS
+- All contributors and users
+
+---
+
+## 📞 Support
+
+For support, please open an issue in the [GitHub repository](https://github.com/Jim-devENG/candidate-compliance-tracker/issues).
+
+---
+
+## 🔗 Useful Links
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [React Documentation](https://react.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Laravel Sanctum Documentation](https://laravel.com/docs/sanctum)
+
+---
+
+**Made with ❤️ for efficient credential management**
