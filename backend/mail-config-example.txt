@@ -1,0 +1,14 @@
+﻿# Mail Configuration for Mailtrap (Test Environment)
+# Get credentials from https://mailtrap.io
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@example.com"
+MAIL_FROM_NAME=""
+
+# Alternative: Use log driver for local testing (emails saved to storage/logs/laravel.log)
+# MAIL_MAILER=log
