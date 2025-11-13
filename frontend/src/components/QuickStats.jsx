@@ -37,42 +37,42 @@ const QuickStats = ({ credentials }) => {
     {
       label: 'Added This Month',
       value: addedThisMonth,
-      icon: <TrendingUp className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      icon: <TrendingUp className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
       color: 'bg-goodwill-primary',
     },
     {
       label: 'Renewals Needed',
       value: renewalsNeeded,
-      icon: <RefreshCw className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      icon: <RefreshCw className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
       color: 'bg-goodwill-secondary',
     },
     {
       label: 'Compliance Rate',
       value: `${complianceRate}%`,
-      icon: <CheckCircle2 className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      icon: <CheckCircle2 className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
       color: 'bg-goodwill-primary',
     },
     {
       label: 'Expiring Next Week',
       value: expiringNextWeek,
-      icon: <AlertTriangle className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      icon: <AlertTriangle className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
       color: 'bg-goodwill-secondary',
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4 stagger-children">
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="bg-goodwill-light rounded-2xl p-4 shadow-soft border border-goodwill-border hover:shadow-medium transition-all duration-200 hover:border-goodwill-primary/20 group"
+          className="bg-white rounded-lg p-3 shadow-sm border border-goodwill-border/50 hover:border-goodwill-primary/30 transition-all duration-200 group cursor-pointer"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-goodwill-text-muted mb-1.5 uppercase tracking-wide">{stat.label}</p>
-              <p className="text-2xl font-bold text-goodwill-dark">{stat.value}</p>
+              <p className="text-xs font-medium text-goodwill-text-muted mb-1 uppercase tracking-wide">{stat.label}</p>
+              <p className="text-xl font-bold text-goodwill-dark animate-count-up">{stat.value}</p>
             </div>
-            <div className={`${stat.color} w-11 h-11 rounded-xl flex items-center justify-center shadow-medium group-hover:scale-110 transition-transform duration-200`}>
+            <div className={`${stat.color} w-8 h-8 rounded-lg flex items-center justify-center`}>
               {stat.icon}
             </div>
           </div>

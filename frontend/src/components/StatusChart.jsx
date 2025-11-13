@@ -18,23 +18,23 @@ const StatusChart = ({ credentials }) => {
   ];
 
   return (
-    <div className="bg-goodwill-light rounded-2xl p-6 shadow-soft border border-goodwill-border">
-      <h3 className="text-lg font-bold text-goodwill-dark mb-5">Status Distribution</h3>
-      <div className="space-y-5">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-goodwill-border/50 transition-all duration-200">
+      <h3 className="text-sm font-semibold text-goodwill-dark mb-3 animate-fade-in-down">Status Distribution</h3>
+      <div className="space-y-3 stagger-children">
         {statusData.map((item, index) => {
           const percentage = (item.count / total) * 100;
           const barWidth = (item.count / maxCount) * 100;
           
           return (
-            <div key={index}>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className={`text-sm font-semibold ${item.textColor}`}>{item.label}</span>
-                <span className={`text-sm font-bold ${item.textColor}`}>{item.count} ({percentage.toFixed(1)}%)</span>
+            <div key={index} className="group animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className={`text-xs font-medium ${item.textColor}`}>{item.label}</span>
+                <span className={`text-xs font-semibold ${item.textColor} animate-count-up`}>{item.count} ({percentage.toFixed(1)}%)</span>
               </div>
-              <div className="w-full bg-goodwill-light rounded-full h-3 overflow-hidden shadow-inner">
+              <div className="w-full bg-goodwill-light rounded-full h-2 overflow-hidden">
                 <div
-                  className={`${item.color} h-full rounded-full transition-all duration-500 shadow-sm`}
-                  style={{ width: `${barWidth}%` }}
+                  className={`${item.color} h-full rounded-full transition-all duration-500 ease-out`}
+                  style={{ width: `${barWidth}%`, animationDelay: `${index * 0.15}s` }}
                 ></div>
               </div>
             </div>

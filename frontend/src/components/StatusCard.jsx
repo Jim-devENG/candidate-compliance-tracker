@@ -29,30 +29,28 @@ const StatusCard = ({ title, count, color, icon }) => {
   };
 
   const iconComponents = {
-    check: <CheckCircle2 className="w-4 h-4 text-white" strokeWidth={2.5} />,
-    warning: <AlertTriangle className="w-4 h-4 text-white" strokeWidth={2.5} />,
-    error: <XCircle className="w-4 h-4 text-white" strokeWidth={2.5} />,
-    chart: <BarChart3 className="w-4 h-4 text-white" strokeWidth={2.5} />,
+    check: <CheckCircle2 className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
+    warning: <AlertTriangle className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
+    error: <XCircle className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
+    chart: <BarChart3 className="w-3.5 h-3.5 text-white" strokeWidth={2} />,
   };
 
   const iconElement = typeof icon === 'string' ? iconComponents[icon] || icon : icon;
   const colors = colorClasses[color] || colorClasses.gray;
 
   return (
-    <div className={`relative rounded-2xl p-5 ${colors.bg} ${colors.shadow} hover:scale-[1.02] transition-all duration-200 overflow-hidden group`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+    <div className={`relative rounded-lg p-3 ${colors.bg} ${colors.shadow} transition-all duration-200 overflow-hidden group cursor-pointer`}>
       <div className="relative flex items-center justify-between">
         <div>
-          <p className={`text-xs font-semibold ${colors.text} opacity-95 mb-1.5 uppercase tracking-wide`}>{title}</p>
-          <p className={`text-3xl font-bold ${colors.text} tracking-tight`}>{count}</p>
+          <p className={`text-xs font-medium ${colors.text} opacity-90 mb-1 uppercase tracking-wide`}>{title}</p>
+          <p className={`text-2xl font-bold ${colors.text} tracking-tight animate-count-up`}>{count}</p>
         </div>
-        <div className={`h-12 w-12 rounded-xl ${colors.iconBg} backdrop-blur-sm flex items-center justify-center shadow-medium group-hover:scale-110 transition-transform duration-200`}>
+        <div className={`h-8 w-8 rounded-lg ${colors.iconBg} flex items-center justify-center`}>
           <div className={colors.text}>
             {iconElement}
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 rounded-b-2xl"></div>
     </div>
   );
 };

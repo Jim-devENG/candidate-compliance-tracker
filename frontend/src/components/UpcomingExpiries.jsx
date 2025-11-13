@@ -31,28 +31,29 @@ const UpcomingExpiries = ({ credentials }) => {
   };
 
   return (
-    <div className="bg-goodwill-light rounded-2xl p-6 shadow-soft border border-goodwill-border">
-      <h3 className="text-lg font-bold text-goodwill-dark mb-5">Upcoming Expiries (Next 30 Days)</h3>
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-goodwill-border/50 transition-all duration-200">
+      <h3 className="text-sm font-semibold text-goodwill-dark mb-3 animate-fade-in-down">Upcoming Expiries</h3>
       {upcoming.length === 0 ? (
-        <p className="text-sm text-goodwill-text-muted">No upcoming expiries</p>
+        <p className="text-xs text-goodwill-text-muted animate-fade-in">No upcoming expiries</p>
       ) : (
-        <div className="space-y-3">
-          {upcoming.map((cred) => {
+        <div className="space-y-2 stagger-children">
+          {upcoming.map((cred, index) => {
             const days = getDaysUntil(cred.expiry_date);
             return (
               <div
                 key={cred.id}
-                className="flex items-center justify-between p-4 rounded-xl border border-goodwill-border hover:bg-goodwill-light/50 transition-all duration-200 hover:border-goodwill-primary/30"
+                className="flex items-center justify-between p-2.5 rounded-lg border border-goodwill-border/30 hover:bg-goodwill-light/50 transition-all duration-200 cursor-pointer group animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-goodwill-dark">{cred.candidate_name}</p>
+                  <p className="text-xs font-medium text-goodwill-dark">{cred.candidate_name}</p>
                   <p className="text-xs text-goodwill-text-muted mt-0.5">{cred.credential_type}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-medium text-goodwill-text-muted mb-1">
+                  <p className="text-xs text-goodwill-text-muted mb-1">
                     {new Date(cred.expiry_date).toLocaleDateString()}
                   </p>
-                  <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border ${getUrgencyColor(days)}`}>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded border ${getUrgencyColor(days)}`}>
                     {days === 0 ? 'Today' : days === 1 ? '1 day' : `${days} days`}
                   </span>
                 </div>

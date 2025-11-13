@@ -18,26 +18,30 @@ const CredentialsByType = ({ credentials }) => {
   ];
 
   return (
-    <div className="bg-goodwill-light rounded-2xl p-6 shadow-soft border border-goodwill-border">
-      <h3 className="text-lg font-bold text-goodwill-dark mb-5">Top Credential Types</h3>
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-goodwill-border/50 transition-all duration-200">
+      <h3 className="text-sm font-semibold text-goodwill-dark mb-3 animate-fade-in-down">Top Credential Types</h3>
       {sortedTypes.length === 0 ? (
-        <p className="text-sm text-goodwill-text-muted">No credentials yet</p>
+        <p className="text-xs text-goodwill-text-muted animate-fade-in">No credentials yet</p>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-2.5 stagger-children">
           {sortedTypes.map(([type, count], index) => {
             const colorScheme = colors[index % colors.length];
             return (
-              <div key={type} className="flex items-center gap-3">
-                <div className={`${colorScheme.bg} w-3 h-3 rounded-full shadow-sm`}></div>
+              <div 
+                key={type} 
+                className="flex items-center gap-2 group cursor-pointer animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`${colorScheme.bg} w-2 h-2 rounded-full`}></div>
                 <div className="flex-1">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className={`text-sm font-semibold ${colorScheme.text}`}>{type}</span>
-                    <span className={`text-sm font-bold ${colorScheme.text}`}>{count}</span>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`text-xs font-medium ${colorScheme.text}`}>{type}</span>
+                    <span className={`text-xs font-semibold ${colorScheme.text} animate-count-up`}>{count}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 shadow-inner">
+                  <div className="w-full bg-goodwill-light rounded-full h-1.5">
                     <div
-                      className={`${colorScheme.bg} h-2 rounded-full transition-all duration-500 shadow-sm`}
-                      style={{ width: `${(count / credentials.length) * 100}%` }}
+                      className={`${colorScheme.bg} h-1.5 rounded-full transition-all duration-500 ease-out`}
+                      style={{ width: `${(count / credentials.length) * 100}%`, animationDelay: `${index * 0.15}s` }}
                     ></div>
                   </div>
                 </div>

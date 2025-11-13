@@ -192,53 +192,45 @@ const Dashboard = () => {
   return (
     <Layout onAddClick={handleAdd}>
       {/* Notification Banner */}
-      <NotificationBanner expiringSoonCount={expiringSoonCount} />
+      <div className="animate-fade-in-down">
+        <NotificationBanner expiringSoonCount={expiringSoonCount} />
+      </div>
 
       {/* Email Triggers - Admin Only */}
       {isAdmin && (
-        <div className="bg-gradient-to-br from-white via-goodwill-light to-white rounded-2xl shadow-large p-6 mb-6 border border-goodwill-border hover:border-goodwill-primary/40 transition-all duration-300 overflow-hidden relative">
-          {/* Decorative gradient overlay */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-goodwill-primary/5 to-goodwill-secondary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-          
+        <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-goodwill-border/50 hover:border-goodwill-primary/30 transition-all duration-300 overflow-hidden relative animate-fade-in-up">
           <div className="relative z-10">
-            <div className="flex items-start justify-between flex-wrap gap-6">
+            <div className="flex items-center justify-between flex-wrap gap-4">
               {/* Header Section */}
-              <div className="flex-1 min-w-[280px]">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-3 bg-gradient-to-br from-goodwill-primary to-goodwill-primary/80 rounded-xl shadow-medium">
-                    <Mail className="w-6 h-6 text-white" strokeWidth={2.5} />
+              <div className="flex-1 min-w-[200px]">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 bg-goodwill-primary/10 rounded-lg">
+                    <Mail className="w-4 h-4 text-goodwill-primary" strokeWidth={2} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-goodwill-dark mb-1">Email Management</h3>
-                    <p className="text-sm text-goodwill-text-muted">Manually trigger reminder and summary emails</p>
+                    <h3 className="text-sm font-semibold text-goodwill-dark">Email Management</h3>
+                    <p className="text-xs text-goodwill-text-muted">Trigger reminder and summary emails</p>
                   </div>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-3 flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap">
                 <button
                   onClick={handleSendReminders}
                   disabled={sendingEmails.reminders}
-                  className="group relative px-5 py-3.5 bg-white border-2 border-goodwill-primary rounded-xl font-semibold text-goodwill-primary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 shadow-soft hover:shadow-large hover:scale-[1.03] active:scale-[0.97] overflow-hidden"
+                  className="px-3 py-2 bg-white border border-goodwill-primary rounded-lg text-xs font-medium text-goodwill-primary transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 hover:bg-goodwill-primary hover:text-white"
                 >
-                  {/* Hover background effect */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-goodwill-primary to-goodwill-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  <span className="absolute inset-0 bg-goodwill-primary opacity-0 group-active:opacity-100 transition-opacity duration-150"></span>
-                  
-                  {/* Content */}
-                  <div className="relative z-10 flex items-center gap-3">
+                  <div className="flex items-center gap-1.5">
                     {sendingEmails.reminders ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-goodwill-primary border-t-transparent rounded-full animate-spin group-hover:border-white"></div>
-                        <span className="group-hover:text-white transition-colors duration-300">Sending...</span>
+                        <div className="w-3.5 h-3.5 border-2 border-goodwill-primary border-t-transparent rounded-full animate-spin"></div>
+                        <span>Sending...</span>
                       </>
                     ) : (
                       <>
-                        <div className="p-1.5 bg-goodwill-primary/10 rounded-lg group-hover:bg-white/20 transition-colors duration-300">
-                          <Mail className="w-4 h-4 text-goodwill-primary group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
-                        </div>
-                        <span className="group-hover:text-white transition-colors duration-300">Send Reminders</span>
+                        <Mail className="w-3.5 h-3.5" strokeWidth={2} />
+                        <span>Send Reminders</span>
                       </>
                     )}
                   </div>
@@ -247,25 +239,18 @@ const Dashboard = () => {
                 <button
                   onClick={handleSendSummary}
                   disabled={sendingEmails.summary}
-                  className="group relative px-5 py-3.5 bg-white border-2 border-goodwill-secondary rounded-xl font-semibold text-goodwill-secondary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 shadow-soft hover:shadow-large hover:scale-[1.03] active:scale-[0.97] overflow-hidden"
+                  className="px-3 py-2 bg-white border border-goodwill-secondary rounded-lg text-xs font-medium text-goodwill-secondary transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 hover:bg-goodwill-secondary hover:text-white"
                 >
-                  {/* Hover background effect */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-goodwill-secondary to-goodwill-secondary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  <span className="absolute inset-0 bg-goodwill-secondary opacity-0 group-active:opacity-100 transition-opacity duration-150"></span>
-                  
-                  {/* Content */}
-                  <div className="relative z-10 flex items-center gap-3">
+                  <div className="flex items-center gap-1.5">
                     {sendingEmails.summary ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-goodwill-secondary border-t-transparent rounded-full animate-spin group-hover:border-white"></div>
-                        <span className="group-hover:text-white transition-colors duration-300">Sending...</span>
+                        <div className="w-3.5 h-3.5 border-2 border-goodwill-secondary border-t-transparent rounded-full animate-spin"></div>
+                        <span>Sending...</span>
                       </>
                     ) : (
                       <>
-                        <div className="p-1.5 bg-goodwill-secondary/10 rounded-lg group-hover:bg-white/20 transition-colors duration-300">
-                          <FileText className="w-4 h-4 text-goodwill-secondary group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
-                        </div>
-                        <span className="group-hover:text-white transition-colors duration-300">Send Summary</span>
+                        <FileText className="w-3.5 h-3.5" strokeWidth={2} />
+                        <span>Send Summary</span>
                       </>
                     )}
                   </div>
@@ -277,10 +262,12 @@ const Dashboard = () => {
       )}
 
       {/* Quick Stats */}
-      <QuickStats credentials={allCredentials} />
+      <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+        <QuickStats credentials={allCredentials} />
+      </div>
 
       {/* Status Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4 stagger-children">
         <StatusCard
           title="Active"
           count={statusCounts.active}
@@ -307,12 +294,32 @@ const Dashboard = () => {
         />
       </div>
 
+      {/* Analytics Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 stagger-children">
+        <div className="lg:col-span-2 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <StatusChart credentials={allCredentials} />
+        </div>
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <CredentialsByType credentials={allCredentials} />
+        </div>
+      </div>
+
+      {/* Upcoming Expiries */}
+      <div className="mb-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+        <UpcomingExpiries credentials={allCredentials} />
+      </div>
+
+      {/* Quick Filters */}
+      <div className="animate-slide-in-left mb-4" style={{ animationDelay: '0.3s' }}>
+        <QuickFilters onFilterChange={handleQuickFilter} activeFilter={quickFilter} />
+      </div>
+
       {/* Search and Filters */}
-      <div className="bg-gradient-to-r from-goodwill-primary to-goodwill-dark rounded-2xl shadow-large p-6 mb-6 border border-goodwill-primary/20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-goodwill-primary rounded-lg shadow-sm p-4 mb-2 border border-goodwill-primary/20 animate-slide-in-right">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div>
-            <label className="block text-sm font-bold text-white mb-2.5 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <label className="block text-xs font-medium text-white/90 mb-1.5 flex items-center gap-1.5">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               Search by Name
@@ -322,12 +329,12 @@ const Dashboard = () => {
               placeholder="Enter candidate name..."
               value={filters.name}
               onChange={(e) => updateFilters({ name: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-goodwill-border rounded-xl focus:ring-2 focus:ring-white focus:bg-white shadow-medium transition-all text-goodwill-dark placeholder:text-goodwill-text-muted"
+              className="w-full px-3 py-2 bg-white border border-goodwill-border/50 rounded-lg focus:ring-1 focus:ring-white focus:bg-white text-sm transition-all duration-300 text-goodwill-dark placeholder:text-goodwill-text-muted/70"
             />
           </div>
           <div>
-            <label className="block text-sm font-bold text-white mb-2.5 flex items-center gap-2">
-              <Filter className="w-4 h-4 text-white" strokeWidth={2} />
+            <label className="block text-xs font-medium text-white/90 mb-1.5 flex items-center gap-1.5">
+              <Filter className="w-3 h-3" strokeWidth={2} />
               Filter by Type
             </label>
             <input
@@ -335,46 +342,28 @@ const Dashboard = () => {
               placeholder="Enter credential type..."
               value={filters.type}
               onChange={(e) => updateFilters({ type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-goodwill-border rounded-xl focus:ring-2 focus:ring-white focus:bg-white shadow-medium transition-all text-goodwill-dark placeholder:text-goodwill-text-muted"
+              className="w-full px-3 py-2 bg-white border border-goodwill-border/50 rounded-lg focus:ring-1 focus:ring-white focus:bg-white text-sm transition-all duration-300 text-goodwill-dark placeholder:text-goodwill-text-muted/70"
             />
           </div>
           <div className="flex items-end">
             <CSVLink
               data={csvData}
               filename={`credentials-${new Date().toISOString().split('T')[0]}.csv`}
-              className="w-full px-4 py-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-xl text-center transition-all duration-200 flex items-center justify-center gap-2 font-semibold shadow-medium hover:shadow-large hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full px-3 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-center transition-all duration-300 flex items-center justify-center gap-1.5 text-xs font-medium"
             >
-              <Download className="w-5 h-5 text-white" strokeWidth={2} />
+              <Download className="w-3.5 h-3.5" strokeWidth={2} />
               Download CSV
             </CSVLink>
           </div>
         </div>
       </div>
 
-      {/* Analytics Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div className="lg:col-span-2">
-          <StatusChart credentials={allCredentials} />
-        </div>
-        <div>
-          <CredentialsByType credentials={allCredentials} />
-        </div>
-      </div>
-
-      {/* Upcoming Expiries */}
-      <div className="mb-6">
-        <UpcomingExpiries credentials={allCredentials} />
-      </div>
-
-      {/* Quick Filters */}
-      <QuickFilters onFilterChange={handleQuickFilter} activeFilter={quickFilter} />
-
       {/* Data Table */}
-      <div className="bg-goodwill-light rounded-2xl shadow-large overflow-hidden border border-goodwill-border">
+      <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-goodwill-border/50 animate-scale-in">
         {loading ? (
           <div className="p-12 text-center bg-goodwill-light/50">
-            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-goodwill-primary border-t-transparent"></div>
-            <p className="mt-4 text-goodwill-dark font-semibold">Loading credentials...</p>
+            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-goodwill-primary border-t-transparent animate-glow"></div>
+            <p className="mt-4 text-goodwill-dark font-semibold animate-pulse">Loading credentials...</p>
           </div>
         ) : error ? (
           <div className="p-8 text-center bg-goodwill-secondary/10 text-goodwill-dark font-semibold rounded-2xl border border-goodwill-secondary/30">{error}</div>
@@ -385,122 +374,116 @@ const Dashboard = () => {
         ) : (
           <div className="overflow-x-auto max-w-full">
             <table className="w-full divide-y divide-goodwill-border">
-              <thead className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 border-b-2 border-blue-700/30">
+              <thead className="bg-goodwill-primary border-b border-goodwill-primary/20 animate-fade-in-down">
                 <tr>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider">
                     Candidate
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden md:table-cell">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider hidden md:table-cell">
                     Position
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider">
                     Type
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden lg:table-cell">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider hidden lg:table-cell">
                     Issue
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider">
                     Expiry
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden lg:table-cell">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider hidden lg:table-cell">
                     Email
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden xl:table-cell">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider hidden xl:table-cell">
                     Doc
                   </th>
-                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-3 py-2.5 text-left text-xs font-semibold text-white uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-4 py-3.5 text-right text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-3 py-2.5 text-right text-xs font-semibold text-white uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-goodwill-light divide-y divide-goodwill-border">
+              <tbody className="bg-white divide-y divide-goodwill-border/30">
                 {filteredCredentials.map((credential, index) => (
                   <tr 
                     key={credential.id} 
-                    className={`hover:bg-white/50 transition-all duration-200 ${
-                      index % 2 === 0 ? 'bg-goodwill-light' : 'bg-white/30'
-                    }`}
+                    className={`hover:bg-goodwill-light/50 transition-all duration-200 ${
+                      index % 2 === 0 ? 'bg-white' : 'bg-goodwill-light/30'
+                    } animate-fade-in`}
+                    style={{ animationDelay: `${index * 0.05}s` }}
                   >
-                    <td className="px-4 py-3 text-sm font-semibold text-goodwill-dark max-w-[120px] truncate">
+                    <td className="px-3 py-2 text-sm font-medium text-goodwill-dark max-w-[120px] truncate">
                       {credential.candidate_name}
                     </td>
-                    <td className="px-4 py-3 text-sm text-goodwill-text hidden md:table-cell max-w-[100px] truncate">
+                    <td className="px-3 py-2 text-sm text-goodwill-text-muted hidden md:table-cell max-w-[100px] truncate">
                       {credential.position}
                     </td>
-                    <td className="px-4 py-3 text-sm text-goodwill-text max-w-[100px] truncate">
+                    <td className="px-3 py-2 text-sm text-goodwill-text-muted max-w-[100px] truncate">
                       {credential.credential_type}
                     </td>
-                    <td className="px-4 py-3 text-sm text-goodwill-text hidden lg:table-cell">
+                    <td className="px-3 py-2 text-xs text-goodwill-text-muted hidden lg:table-cell">
                       {credential.issue_date
                         ? new Date(credential.issue_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                         : '-'}
                     </td>
-                    <td className="px-4 py-3 text-sm text-goodwill-text font-medium">
+                    <td className="px-3 py-2 text-xs text-goodwill-text-muted font-medium">
                       {credential.expiry_date
                         ? new Date(credential.expiry_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                         : '-'}
                     </td>
-                    <td className="px-4 py-3 text-sm text-goodwill-text hidden lg:table-cell max-w-[120px] truncate">
+                    <td className="px-3 py-2 text-xs text-goodwill-text-muted hidden lg:table-cell max-w-[120px] truncate">
                       {credential.email}
                     </td>
-                    <td className="px-4 py-3 hidden xl:table-cell">
+                    <td className="px-3 py-2 hidden xl:table-cell">
                       {credential.document_url ? (
-                        <div className="inline-flex items-center gap-2 px-3 py-2 bg-goodwill-light rounded-xl border-2 border-goodwill-primary/20 hover:border-goodwill-primary/40 shadow-soft hover:shadow-medium transition-all duration-300 group">
-                          <div className="flex items-center gap-2">
-                            <div className="p-2 bg-gradient-to-br from-goodwill-primary/25 to-goodwill-primary/20 rounded-lg group-hover:from-goodwill-primary/35 group-hover:to-goodwill-primary/25 transition-all duration-300 border border-goodwill-primary/30 shadow-sm">
-                              <FileText className="w-4 h-4 text-goodwill-primary" strokeWidth={3} />
-                            </div>
-                            <div className="flex items-center gap-1.5">
-                              <a
-                                href={credential.document_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2 bg-white border-2 border-goodwill-primary rounded-lg hover:bg-goodwill-primary/10 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 flex items-center justify-center"
-                                title="View Document"
-                              >
-                                <FileText className="w-3.5 h-3.5 text-goodwill-primary" strokeWidth={2.5} />
-                              </a>
-                              <a
-                                href={credential.document_url}
-                                download
-                                className="p-2 bg-white border-2 border-goodwill-primary rounded-lg hover:bg-goodwill-primary/10 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 flex items-center justify-center"
-                                title="Download Document"
-                              >
-                                <Download className="w-3.5 h-3.5 text-goodwill-primary" strokeWidth={2.5} />
-                              </a>
-                            </div>
-                          </div>
+                        <div className="inline-flex items-center gap-1.5">
+                          <a
+                            href={credential.document_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 bg-goodwill-primary/10 border border-goodwill-primary/20 rounded hover:bg-goodwill-primary/20 transition-all duration-200 flex items-center justify-center"
+                            title="View Document"
+                          >
+                            <FileText className="w-3 h-3 text-goodwill-primary" strokeWidth={2} />
+                          </a>
+                          <a
+                            href={credential.document_url}
+                            download
+                            className="p-1.5 bg-goodwill-primary/10 border border-goodwill-primary/20 rounded hover:bg-goodwill-primary/20 transition-all duration-200 flex items-center justify-center"
+                            title="Download Document"
+                          >
+                            <Download className="w-3 h-3 text-goodwill-primary" strokeWidth={2} />
+                          </a>
                         </div>
                       ) : (
                         <span className="text-goodwill-text-muted text-sm">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-sm">
+                    <td className="px-3 py-2 text-sm">
                       <StatusTag status={credential.status} expiryDate={credential.expiry_date} />
                     </td>
-                    <td className="px-4 py-3 text-right text-sm font-medium">
+                    <td className="px-3 py-2 text-right text-sm font-medium">
                       {isAdmin && (
-                        <div className="flex justify-end gap-2">
+                        <div className="flex justify-end gap-1.5">
                           <button
                             onClick={() => handleEdit(credential)}
-                            className="p-2 bg-goodwill-primary text-white rounded-xl hover:bg-goodwill-primary/90 transition-all duration-200 shadow-soft hover:shadow-medium"
+                            className="p-1.5 bg-goodwill-primary text-white rounded hover:bg-goodwill-primary/90 transition-all duration-200 group"
                             title="Edit"
                           >
-                            <Edit className="w-4 h-4 text-white" strokeWidth={2} />
+                            <Edit className="w-3.5 h-3.5 text-white" strokeWidth={2} />
                           </button>
                           <button
                             onClick={() => handleDelete(credential.id)}
                             disabled={deletingId === credential.id}
-                            className="p-2 bg-goodwill-secondary text-white rounded-xl hover:bg-goodwill-secondary/90 transition-all duration-200 disabled:opacity-50 shadow-soft hover:shadow-medium"
+                            className="p-1.5 bg-goodwill-secondary text-white rounded hover:bg-goodwill-secondary/90 transition-all duration-200 disabled:opacity-50 group"
                             title="Delete"
                           >
                             {deletingId === credential.id ? (
-                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                             ) : (
-                              <Trash2 className="w-4 h-4 text-white" strokeWidth={2} />
+                              <Trash2 className="w-3.5 h-3.5 text-white" strokeWidth={2} />
                             )}
                           </button>
                         </div>
@@ -516,23 +499,23 @@ const Dashboard = () => {
 
       {/* Pagination controls */}
       {!loading && !error && filteredCredentials.length > 0 && (
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-goodwill-light rounded-2xl shadow-lg border border-goodwill-border">
-          <div className="text-sm font-semibold text-goodwill-dark bg-white/80 px-4 py-2 rounded-xl shadow-sm">
-            📄 Page {pagination.current_page} of {pagination.last_page} • {pagination.total} total
+        <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 p-3 bg-white rounded-lg shadow-sm border border-goodwill-border/50 animate-fade-in-up">
+          <div className="text-xs font-medium text-goodwill-text-muted">
+            Page {pagination.current_page} of {pagination.last_page} • {pagination.total} total
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setPage(Math.max(1, page - 1))}
               disabled={page <= 1}
-              className="px-4 py-2 rounded-xl bg-goodwill-primary text-white font-semibold hover:bg-goodwill-primary/90 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all disabled:hover:scale-100"
+              className="px-3 py-1.5 rounded bg-goodwill-primary text-white text-xs font-medium hover:bg-goodwill-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               ← Prev
             </button>
-            <span className="px-4 py-2 text-sm font-bold text-goodwill-dark bg-white rounded-xl shadow-sm">Page {page}</span>
+            <span className="px-3 py-1.5 text-xs font-medium text-goodwill-dark bg-goodwill-light rounded">Page {page}</span>
             <button
               onClick={() => setPage(Math.min(pagination.last_page || page + 1, page + 1))}
               disabled={pagination.last_page ? page >= pagination.last_page : true}
-              className="px-4 py-2 rounded-xl bg-goodwill-secondary text-white font-semibold hover:bg-goodwill-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all disabled:hover:scale-100"
+              className="px-3 py-1.5 rounded bg-goodwill-secondary text-white text-xs font-medium hover:bg-goodwill-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               Next →
             </button>
@@ -542,7 +525,7 @@ const Dashboard = () => {
                 setPerPage(Number(e.target.value));
                 setPage(1);
               }}
-              className="ml-2 px-3 py-2 border-0 bg-white rounded-xl text-sm font-semibold text-goodwill-dark shadow-sm focus:ring-2 focus:ring-goodwill-primary"
+              className="ml-2 px-2 py-1.5 border border-goodwill-border/50 bg-white rounded text-xs font-medium text-goodwill-dark focus:ring-1 focus:ring-goodwill-primary transition-all duration-200 cursor-pointer"
             >
               <option value={10}>10 / page</option>
               <option value={25}>25 / page</option>

@@ -91,9 +91,33 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
 
   return (
     <div className="fixed inset-0 z-50">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={loading ? undefined : onClose} />
+      <div 
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm" 
+        onClick={(e) => {
+          if (!loading) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Reset form data
+            setFormData({
+              candidate_name: '',
+              position: '',
+              credential_type: '',
+              issue_date: '',
+              expiry_date: '',
+              email: '',
+              status: '',
+            });
+            setDocumentFile(null);
+            setError(null);
+            onClose();
+          }
+        }} 
+      />
       <div className="relative h-full w-full flex items-center justify-center p-4">
-        <div className="bg-goodwill-light/95 border border-goodwill-border rounded-lg shadow-2xl max-w-lg w-full mx-auto">
+        <div 
+          className="bg-goodwill-light/95 border border-goodwill-border rounded-lg shadow-2xl max-w-lg w-full mx-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="relative overflow-hidden rounded-t-lg">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-10" />
             <div className="px-3 pt-2.5 pb-2 flex items-start justify-between">
@@ -107,7 +131,23 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
               </div>
               <button
                 type="button"
-                onClick={onClose}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // Reset form data
+                  setFormData({
+                    candidate_name: '',
+                    position: '',
+                    credential_type: '',
+                    issue_date: '',
+                    expiry_date: '',
+                    email: '',
+                    status: '',
+                  });
+                  setDocumentFile(null);
+                  setError(null);
+                  onClose();
+                }}
                 className="inline-flex items-center justify-center h-6 w-6 rounded-lg border border-goodwill-border text-goodwill-text hover:bg-goodwill-light transition-colors"
                 disabled={loading}
                 aria-label="Close"
@@ -245,7 +285,23 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
             <div className="mt-3 flex items-center justify-end gap-2">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // Reset form data
+                  setFormData({
+                    candidate_name: '',
+                    position: '',
+                    credential_type: '',
+                    issue_date: '',
+                    expiry_date: '',
+                    email: '',
+                    status: '',
+                  });
+                  setDocumentFile(null);
+                  setError(null);
+                  onClose();
+                }}
                 className="px-3 py-1.5 text-sm rounded-lg border border-goodwill-border text-goodwill-dark hover:bg-goodwill-light transition-colors"
                 disabled={loading}
               >

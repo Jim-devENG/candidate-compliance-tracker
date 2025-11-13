@@ -171,31 +171,31 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-goodwill-light via-goodwill-light to-goodwill-light/80 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-gradient-to-br from-white via-goodwill-light to-white rounded-2xl shadow-large overflow-hidden border border-goodwill-border">
+    <div className="min-h-screen bg-goodwill-light py-4 px-4">
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-goodwill-border/50">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 px-8 py-6 border-b border-blue-700/30" style={{ background: 'linear-gradient(to right, #02646f, #02646f, #02646f)' }}>
-            <div className="flex items-center gap-4 mb-4">
+          <div className="bg-goodwill-primary px-4 py-3 border-b border-goodwill-primary/20">
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => navigate('/dashboard')}
-                className="text-white hover:text-white/80 transition-colors p-2 hover:bg-white/10 rounded-lg"
+                className="text-white hover:text-white/80 transition-colors p-1.5 hover:bg-white/10 rounded"
                 title="Back to Dashboard"
               >
-                <ArrowLeft className="w-6 h-6 text-white" strokeWidth={2.5} />
+                <ArrowLeft className="w-4 h-4 text-white" strokeWidth={2} />
               </button>
               <div>
-                <h1 className="text-3xl font-bold text-white">My Profile</h1>
-                <p className="text-white/90 mt-2">Manage your account settings and preferences</p>
+                <h1 className="text-lg font-semibold text-white">My Profile</h1>
+                <p className="text-white/90 text-xs mt-0.5">Manage your account settings</p>
               </div>
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-8">
+          <div className="p-4">
             {message.text && (
               <div
-                className={`mb-6 p-4 rounded-lg ${
+                className={`mb-4 p-3 rounded-lg text-sm ${
                   message.type === 'success'
                     ? 'bg-goodwill-primary/10 text-goodwill-dark border border-goodwill-primary/30'
                     : 'bg-goodwill-secondary/10 text-goodwill-dark border border-goodwill-secondary/30'
@@ -205,12 +205,12 @@ const Profile = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/* Avatar Section */}
-              <div className="flex items-start gap-6 pb-6 border-b border-goodwill-border">
+              <div className="flex items-start gap-4 pb-4 border-b border-goodwill-border/50">
                 <div className="flex-shrink-0">
                   <div className="relative">
-                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg relative">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm relative">
                       {avatarPreview ? (
                         <img
                           key={`avatar-preview-${user.id}-${user.updated_at || Date.now()}-${avatarPreview.substring(0, 30)}`}
@@ -237,7 +237,7 @@ const Profile = () => {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-goodwill-primary to-goodwill-accent">
-                          <span className="text-3xl font-bold text-white">
+                          <span className="text-xl font-bold text-white">
                             {user.name?.charAt(0).toUpperCase() || 'U'}
                           </span>
                         </div>
@@ -247,36 +247,36 @@ const Profile = () => {
                       <button
                         type="button"
                         onClick={removeAvatar}
-                        className="absolute -top-1 -right-1 w-8 h-8 bg-gradient-to-br from-goodwill-secondary via-goodwill-secondary to-goodwill-secondary/90 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 active:scale-95 group"
+                        className="absolute -top-0.5 -right-0.5 w-6 h-6 bg-goodwill-secondary text-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-200 group"
                         title="Remove avatar"
                       >
-                        <XCircle className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" strokeWidth={2.5} />
+                        <XCircle className="w-3.5 h-3.5" strokeWidth={2} />
                       </button>
                     )}
                   </div>
                 </div>
                 <div className="flex-1">
-                  <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                  <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                     Profile Photo
                   </label>
                   <input
                     type="file"
                     accept="image/*"
                     onChange={handleAvatarChange}
-                    className="block w-full text-sm text-goodwill-text-muted file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-goodwill-primary file:to-goodwill-primary/90 file:text-white hover:file:from-goodwill-primary/90 hover:file:to-goodwill-primary file:transition-all file:duration-200 file:cursor-pointer file:shadow-md hover:file:shadow-lg"
+                    className="block w-full text-xs text-goodwill-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-goodwill-primary file:text-white hover:file:bg-goodwill-primary/90 file:transition-all file:duration-200 file:cursor-pointer"
                   />
-                  <p className="mt-2 text-xs text-goodwill-text-muted">
+                  <p className="mt-1.5 text-xs text-goodwill-text-muted">
                     JPG, PNG or GIF. Max size 2MB.
                   </p>
                 </div>
               </div>
 
               {/* Basic Information */}
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-goodwill-dark">Basic Information</h2>
+              <div className="space-y-3">
+                <h2 className="text-sm font-semibold text-goodwill-dark">Basic Information</h2>
 
                 <div>
-                  <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                  <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                     Full Name
                   </label>
                   <input
@@ -285,12 +285,12 @@ const Profile = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-goodwill-border rounded-lg bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
+                    className="w-full px-3 py-2 border border-goodwill-border/50 rounded-lg bg-white text-sm text-goodwill-dark focus:ring-1 focus:ring-goodwill-primary focus:border-goodwill-primary"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                  <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                     Email Address
                   </label>
                   <input
@@ -299,16 +299,16 @@ const Profile = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-goodwill-border rounded-lg bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
+                    className="w-full px-3 py-2 border border-goodwill-border/50 rounded-lg bg-white text-sm text-goodwill-dark focus:ring-1 focus:ring-goodwill-primary focus:border-goodwill-primary"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                  <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                     Role
                   </label>
-                  <div className="px-4 py-2 bg-goodwill-light border border-goodwill-border rounded-lg">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-goodwill-primary/10 text-goodwill-primary capitalize">
+                  <div className="px-3 py-2 bg-goodwill-light/50 border border-goodwill-border/50 rounded-lg">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-goodwill-primary/10 text-goodwill-primary capitalize">
                       {user.role}
                     </span>
                     <p className="text-xs text-goodwill-text-muted mt-1">
@@ -319,10 +319,10 @@ const Profile = () => {
               </div>
 
               {/* Password Section */}
-              <div className="pt-6 border-t border-goodwill-border">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-goodwill-dark flex items-center gap-2">
-                    <Lock className="w-5 h-5 text-goodwill-primary" />
+              <div className="pt-4 border-t border-goodwill-border/50">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-goodwill-dark flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5 text-goodwill-primary" strokeWidth={2} />
                     Change Password
                   </h2>
                   <button
@@ -338,21 +338,21 @@ const Profile = () => {
                         }));
                       }
                     }}
-                    className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center gap-2 transform hover:scale-[1.02] active:scale-[0.98] ${
+                    className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 flex items-center gap-1.5 ${
                       showPasswordSection
-                        ? 'bg-gradient-to-r from-goodwill-secondary/10 to-goodwill-secondary/5 border-2 border-goodwill-secondary text-goodwill-secondary hover:from-goodwill-secondary/20 hover:to-goodwill-secondary/10 shadow-sm hover:shadow-md'
-                        : 'bg-gradient-to-r from-goodwill-primary to-goodwill-primary/90 text-white hover:from-goodwill-primary/90 hover:to-goodwill-primary shadow-md hover:shadow-lg'
+                        ? 'bg-goodwill-secondary/10 border border-goodwill-secondary text-goodwill-secondary hover:bg-goodwill-secondary/20'
+                        : 'bg-goodwill-primary text-white hover:bg-goodwill-primary/90'
                     }`}
                   >
-                    <Lock className="w-4 h-4" strokeWidth={2.5} />
+                    <Lock className="w-3 h-3" strokeWidth={2} />
                     {showPasswordSection ? 'Cancel' : 'Change Password'}
                   </button>
                 </div>
 
                 {showPasswordSection && (
-                  <div className="space-y-4 bg-goodwill-light p-4 rounded-lg border border-goodwill-border">
+                  <div className="space-y-3 bg-goodwill-light/50 p-3 rounded-lg border border-goodwill-border/50">
                     <div>
-                      <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                      <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                         Current Password
                       </label>
                       <input
@@ -360,12 +360,12 @@ const Profile = () => {
                         name="current_password"
                         value={formData.current_password}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-goodwill-border rounded-lg bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
+                        className="w-full px-3 py-2 border border-goodwill-border/50 rounded-lg bg-white text-sm text-goodwill-dark focus:ring-1 focus:ring-goodwill-primary focus:border-goodwill-primary"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                      <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                         New Password
                       </label>
                       <input
@@ -374,7 +374,7 @@ const Profile = () => {
                         value={formData.password}
                         onChange={handleInputChange}
                         minLength={8}
-                        className="w-full px-4 py-2 border border-goodwill-border rounded-lg bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
+                        className="w-full px-3 py-2 border border-goodwill-border/50 rounded-lg bg-white text-sm text-goodwill-dark focus:ring-1 focus:ring-goodwill-primary focus:border-goodwill-primary"
                       />
                       <p className="mt-1 text-xs text-goodwill-text-muted">
                         Must be at least 8 characters long.
@@ -382,7 +382,7 @@ const Profile = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-goodwill-dark mb-2">
+                      <label className="block text-xs font-medium text-goodwill-dark mb-1.5">
                         Confirm New Password
                       </label>
                       <input
@@ -391,7 +391,7 @@ const Profile = () => {
                         value={formData.password_confirmation}
                         onChange={handleInputChange}
                         minLength={8}
-                        className="w-full px-4 py-2 border border-goodwill-border rounded-lg bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
+                        className="w-full px-3 py-2 border border-goodwill-border/50 rounded-lg bg-white text-sm text-goodwill-dark focus:ring-1 focus:ring-goodwill-primary focus:border-goodwill-primary"
                       />
                     </div>
                   </div>
@@ -399,10 +399,12 @@ const Profile = () => {
               </div>
 
               {/* Submit Button */}
-              <div className="flex items-center justify-end gap-4 pt-6 border-t border-goodwill-border">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-goodwill-border/50">
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Reset form to original user data
                     setFormData({
                       name: user.name || '',
                       email: user.email || '',
@@ -414,19 +416,21 @@ const Profile = () => {
                     setAvatarPreview(user.avatar_url || null);
                     setShowPasswordSection(false);
                     setMessage({ type: '', text: '' });
+                    // Navigate back to dashboard
+                    navigate('/dashboard');
                   }}
-                  className="px-6 py-3 bg-white border-2 border-goodwill-border rounded-xl text-goodwill-dark hover:border-goodwill-primary hover:text-goodwill-primary font-semibold transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transform hover:scale-[1.02] active:scale-[0.98] group"
+                  className="px-4 py-2 bg-white border border-goodwill-border/50 rounded-lg text-xs font-medium text-goodwill-dark hover:border-goodwill-primary hover:text-goodwill-primary transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5"
                   disabled={loading}
                 >
-                  <X className="w-4 h-4 group-hover:rotate-90 transition-transform duration-200" strokeWidth={2.5} />
+                  <X className="w-3.5 h-3.5" strokeWidth={2} />
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-8 py-3 bg-gradient-to-r from-goodwill-primary via-goodwill-primary to-goodwill-primary/90 hover:from-goodwill-primary/90 hover:via-goodwill-primary hover:to-goodwill-primary text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 group"
+                  className="px-4 py-2 bg-goodwill-primary text-white rounded-lg text-xs font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 hover:bg-goodwill-primary/90 group"
                 >
-                  <Save className={`w-5 h-5 ${loading ? 'animate-spin' : 'group-hover:scale-110'} transition-transform duration-200`} strokeWidth={2.5} />
+                  <Save className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''} transition-transform duration-200`} strokeWidth={2} />
                   {loading ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
