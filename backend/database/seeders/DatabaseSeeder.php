@@ -13,31 +13,15 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     * 
+     * NOTE: Seeding is disabled for production use.
+     * All users must be created through the registration endpoint.
+     * This ensures real-time authentication without test data.
      */
     public function run(): void
     {
-        // Create a test admin user
-        $admin = User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'role' => 'admin',
-        ]);
-
-        // Create a test recruiter user
-        $recruiter = User::factory()->create([
-            'name' => 'Recruiter User',
-            'email' => 'recruiter@example.com',
-            'role' => 'recruiter',
-        ]);
-
-        // Create 10 sample credentials with mixed expiry dates
-        // Some will be expired, some expiring soon, some active
-        Credential::factory(10)->create([
-            'user_id' => $recruiter->id,
-        ]);
-
-        // Optionally run test email seeder for email testing
-        // Uncomment the line below to seed test data for email testing
-        // $this->call(TestEmailSeeder::class);
+        // Seeding is disabled - use registration endpoint for creating users
+        // This ensures all authentication is done through the proper API endpoints
+        // and no test data interferes with real-time authentication
     }
 }

@@ -30,11 +30,18 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Unauthorized - clear token and redirect to login
+      // Unauthorized - token expired or invalid
+      // Clear token immediately
       localStorage.removeItem('auth_token');
       delete api.defaults.headers.common['Authorization'];
-      // Redirect to login will be handled by the route guard
-      if (window.location.pathname !== '/login') {
+      
+      // Dispatch custom event for AuthContext to handle
+      window.dispatchEvent(new CustomEvent('auth:logout', { 
+        detail: { reason: 'token_expired' } 
+      }));
+      
+      // Redirect to login if not already there
+      if (window.location.pathname !== '/login' && !window.location.pathname.startsWith('/forgot-password') && !window.location.pathname.startsWith('/reset-password')) {
         window.location.href = '/login';
       }
     }

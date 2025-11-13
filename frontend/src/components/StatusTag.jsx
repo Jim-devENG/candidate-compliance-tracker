@@ -6,19 +6,19 @@ const StatusTag = ({ status, expiryDate }) => {
   const getStatusConfig = (status) => {
     const configs = {
       active: {
-        color: 'bg-emerald-500 text-white border-emerald-300 shadow-sm shadow-emerald-500/30',
+        color: 'bg-goodwill-primary text-white border-goodwill-primary/30 shadow-sm shadow-goodwill-primary/30',
         label: 'Active',
       },
       expiring_soon: {
-        color: 'bg-amber-500 text-white border-amber-300 shadow-sm shadow-amber-500/30',
+        color: 'bg-goodwill-secondary text-white border-goodwill-secondary/30 shadow-sm shadow-goodwill-secondary/30',
         label: 'Expiring Soon',
       },
       expired: {
-        color: 'bg-rose-500 text-white border-rose-300 shadow-sm shadow-rose-500/30',
+        color: 'bg-goodwill-secondary text-white border-goodwill-secondary/30 shadow-sm shadow-goodwill-secondary/30',
         label: 'Expired',
       },
       pending: {
-        color: 'bg-slate-500 text-white border-slate-300 shadow-sm shadow-slate-500/30',
+        color: 'bg-gray-500 text-white border-gray-300 shadow-sm shadow-gray-500/30',
         label: 'Pending',
       },
     };
@@ -42,7 +42,7 @@ const StatusTag = ({ status, expiryDate }) => {
   return (
     <div className="relative inline-block">
       <span
-        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${config.color} cursor-help`}
+        className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold border ${config.color} cursor-help transition-all duration-200`}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >

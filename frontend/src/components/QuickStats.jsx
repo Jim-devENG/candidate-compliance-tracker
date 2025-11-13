@@ -1,3 +1,5 @@
+import { TrendingUp, RefreshCw, CheckCircle2, AlertTriangle } from 'lucide-react';
+
 const QuickStats = ({ credentials }) => {
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -35,42 +37,42 @@ const QuickStats = ({ credentials }) => {
     {
       label: 'Added This Month',
       value: addedThisMonth,
-      icon: '📈',
-      color: 'bg-blue-500',
+      icon: <TrendingUp className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      color: 'bg-goodwill-primary',
     },
     {
       label: 'Renewals Needed',
       value: renewalsNeeded,
-      icon: '🔄',
-      color: 'bg-orange-500',
+      icon: <RefreshCw className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      color: 'bg-goodwill-secondary',
     },
     {
       label: 'Compliance Rate',
       value: `${complianceRate}%`,
-      icon: '✅',
-      color: 'bg-green-500',
+      icon: <CheckCircle2 className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      color: 'bg-goodwill-primary',
     },
     {
       label: 'Expiring Next Week',
       value: expiringNextWeek,
-      icon: '⚠️',
-      color: 'bg-red-500',
+      icon: <AlertTriangle className="w-5 h-5 text-white" strokeWidth={2.5} />,
+      color: 'bg-goodwill-secondary',
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg p-2.5 shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
+          className="bg-goodwill-light rounded-2xl p-4 shadow-soft border border-goodwill-border hover:shadow-medium transition-all duration-200 hover:border-goodwill-primary/20 group"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-0.5">{stat.label}</p>
-              <p className="text-lg font-bold text-gray-900">{stat.value}</p>
+              <p className="text-xs font-semibold text-goodwill-text-muted mb-1.5 uppercase tracking-wide">{stat.label}</p>
+              <p className="text-2xl font-bold text-goodwill-dark">{stat.value}</p>
             </div>
-            <div className={`${stat.color} w-8 h-8 rounded-lg flex items-center justify-center text-base`}>
+            <div className={`${stat.color} w-11 h-11 rounded-xl flex items-center justify-center shadow-medium group-hover:scale-110 transition-transform duration-200`}>
               {stat.icon}
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { CSVLink } from 'react-csv';
+import { Mail, FileText, Download, Edit, Trash2, Filter } from 'lucide-react';
 import Layout from '../components/Layout/Layout';
 import StatusCard from '../components/StatusCard';
 import StatusTag from '../components/StatusTag';
@@ -193,51 +194,81 @@ const Dashboard = () => {
 
       {/* Email Triggers - Admin Only */}
       {isAdmin && (
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-xl p-6 mb-6">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-1">📧 Email Management</h3>
-              <p className="text-white/90 text-sm">Manually trigger reminder and summary emails</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleSendReminders}
-                disabled={sendingEmails.reminders}
-                className="px-5 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-xl"
-              >
-                {sendingEmails.reminders ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Send Reminders
-                  </>
-                )}
-              </button>
-              <button
-                onClick={handleSendSummary}
-                disabled={sendingEmails.summary}
-                className="px-5 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-xl"
-              >
-                {sendingEmails.summary ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Send Summary
-                  </>
-                )}
-              </button>
+        <div className="bg-gradient-to-br from-white via-goodwill-light to-white rounded-2xl shadow-large p-6 mb-6 border border-goodwill-border hover:border-goodwill-primary/40 transition-all duration-300 overflow-hidden relative">
+          {/* Decorative gradient overlay */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-goodwill-primary/5 to-goodwill-secondary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+          
+          <div className="relative z-10">
+            <div className="flex items-start justify-between flex-wrap gap-6">
+              {/* Header Section */}
+              <div className="flex-1 min-w-[280px]">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-3 bg-gradient-to-br from-goodwill-primary to-goodwill-primary/80 rounded-xl shadow-medium">
+                    <Mail className="w-6 h-6 text-white" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-goodwill-dark mb-1">Email Management</h3>
+                    <p className="text-sm text-goodwill-text-muted">Manually trigger reminder and summary emails</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-3 flex-wrap">
+                <button
+                  onClick={handleSendReminders}
+                  disabled={sendingEmails.reminders}
+                  className="group relative px-5 py-3.5 bg-white border-2 border-goodwill-primary rounded-xl font-semibold text-goodwill-primary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 shadow-soft hover:shadow-large hover:scale-[1.03] active:scale-[0.97] overflow-hidden"
+                >
+                  {/* Hover background effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-goodwill-primary to-goodwill-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute inset-0 bg-goodwill-primary opacity-0 group-active:opacity-100 transition-opacity duration-150"></span>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex items-center gap-3">
+                    {sendingEmails.reminders ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-goodwill-primary border-t-transparent rounded-full animate-spin group-hover:border-white"></div>
+                        <span className="group-hover:text-white transition-colors duration-300">Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-1.5 bg-goodwill-primary/10 rounded-lg group-hover:bg-white/20 transition-colors duration-300">
+                          <Mail className="w-4 h-4 text-goodwill-primary group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
+                        </div>
+                        <span className="group-hover:text-white transition-colors duration-300">Send Reminders</span>
+                      </>
+                    )}
+                  </div>
+                </button>
+                
+                <button
+                  onClick={handleSendSummary}
+                  disabled={sendingEmails.summary}
+                  className="group relative px-5 py-3.5 bg-white border-2 border-goodwill-secondary rounded-xl font-semibold text-goodwill-secondary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 shadow-soft hover:shadow-large hover:scale-[1.03] active:scale-[0.97] overflow-hidden"
+                >
+                  {/* Hover background effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-goodwill-secondary to-goodwill-secondary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute inset-0 bg-goodwill-secondary opacity-0 group-active:opacity-100 transition-opacity duration-150"></span>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex items-center gap-3">
+                    {sendingEmails.summary ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-goodwill-secondary border-t-transparent rounded-full animate-spin group-hover:border-white"></div>
+                        <span className="group-hover:text-white transition-colors duration-300">Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-1.5 bg-goodwill-secondary/10 rounded-lg group-hover:bg-white/20 transition-colors duration-300">
+                          <FileText className="w-4 h-4 text-goodwill-secondary group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
+                        </div>
+                        <span className="group-hover:text-white transition-colors duration-300">Send Summary</span>
+                      </>
+                    )}
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -275,46 +306,43 @@ const Dashboard = () => {
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-indigo-500 rounded-2xl shadow-xl p-6 mb-6">
+      <div className="bg-gradient-to-r from-goodwill-primary to-goodwill-dark rounded-2xl shadow-large p-6 mb-6 border border-goodwill-primary/20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-semibold text-white mb-2">
-              🔍 Search by Name
+            <label className="block text-sm font-bold text-white mb-2.5 flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Search by Name
             </label>
             <input
               type="text"
               placeholder="Enter candidate name..."
               value={filters.name}
               onChange={(e) => updateFilters({ name: e.target.value })}
-              className="w-full px-4 py-2.5 bg-white/90 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-white focus:bg-white shadow-lg transition-all"
+              className="w-full px-4 py-3 bg-white border border-goodwill-border rounded-xl focus:ring-2 focus:ring-white focus:bg-white shadow-medium transition-all text-goodwill-dark placeholder:text-goodwill-text-muted"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-white mb-2">
-              📋 Filter by Type
+            <label className="block text-sm font-bold text-white mb-2.5 flex items-center gap-2">
+              <Filter className="w-4 h-4 text-white" strokeWidth={2} />
+              Filter by Type
             </label>
             <input
               type="text"
               placeholder="Enter credential type..."
               value={filters.type}
               onChange={(e) => updateFilters({ type: e.target.value })}
-              className="w-full px-4 py-2.5 bg-white/90 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-white focus:bg-white shadow-lg transition-all"
+              className="w-full px-4 py-3 bg-white border border-goodwill-border rounded-xl focus:ring-2 focus:ring-white focus:bg-white shadow-medium transition-all text-goodwill-dark placeholder:text-goodwill-text-muted"
             />
           </div>
           <div className="flex items-end">
             <CSVLink
               data={csvData}
               filename={`credentials-${new Date().toISOString().split('T')[0]}.csv`}
-              className="w-full px-4 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-xl text-center transition-all flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl hover:scale-105"
+              className="w-full px-4 py-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-xl text-center transition-all duration-200 flex items-center justify-center gap-2 font-semibold shadow-medium hover:shadow-large hover:scale-[1.02] active:scale-[0.98]"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
+              <Download className="w-5 h-5 text-white" strokeWidth={2} />
               Download CSV
             </CSVLink>
           </div>
@@ -340,149 +368,137 @@ const Dashboard = () => {
       <QuickFilters onFilterChange={handleQuickFilter} activeFilter={quickFilter} />
 
       {/* Data Table */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+      <div className="bg-goodwill-light rounded-2xl shadow-large overflow-hidden border border-goodwill-border">
         {loading ? (
-          <div className="p-12 text-center bg-blue-50">
-            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent"></div>
-            <p className="mt-4 text-gray-700 font-medium">Loading credentials...</p>
+          <div className="p-12 text-center bg-goodwill-light/50">
+            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-goodwill-primary border-t-transparent"></div>
+            <p className="mt-4 text-goodwill-dark font-semibold">Loading credentials...</p>
           </div>
         ) : error ? (
-          <div className="p-8 text-center bg-red-50 text-red-600 font-semibold">{error}</div>
+          <div className="p-8 text-center bg-goodwill-secondary/10 text-goodwill-dark font-semibold rounded-2xl border border-goodwill-secondary/30">{error}</div>
         ) : credentials.length === 0 ? (
-          <div className="p-12 text-center bg-gray-50">
-            <p className="text-gray-600 font-medium">No credentials found. Click "Add New Credential" to get started.</p>
+          <div className="p-12 text-center bg-goodwill-light/30">
+            <p className="text-goodwill-dark font-semibold">No credentials found. Click "Add New Credential" to get started.</p>
           </div>
         ) : (
           <div className="overflow-x-auto max-w-full">
-            <table className="w-full divide-y divide-gray-200">
-              <thead className="bg-indigo-600">
+            <table className="w-full divide-y divide-goodwill-border">
+              <thead className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 border-b-2 border-blue-700/30">
                 <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
                     Candidate
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider hidden md:table-cell">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden md:table-cell">
                     Position
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
                     Type
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider hidden lg:table-cell">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden lg:table-cell">
                     Issue
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
                     Expiry
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider hidden lg:table-cell">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden lg:table-cell">
                     Email
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider hidden xl:table-cell">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider hidden xl:table-cell">
                     Doc
                   </th>
-                  <th className="px-3 py-2 text-left text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-4 py-3.5 text-left text-xs font-bold text-white uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-3 py-2 text-right text-xs font-bold text-white uppercase tracking-wider">
+                  <th className="px-4 py-3.5 text-right text-xs font-bold text-white uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-100">
+              <tbody className="bg-goodwill-light divide-y divide-goodwill-border">
                 {filteredCredentials.map((credential, index) => (
                   <tr 
                     key={credential.id} 
-                    className={`hover:bg-indigo-50 transition-all duration-200 ${
-                      index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
+                    className={`hover:bg-white/50 transition-all duration-200 ${
+                      index % 2 === 0 ? 'bg-goodwill-light' : 'bg-white/30'
                     }`}
                   >
-                    <td className="px-3 py-2 text-xs font-semibold text-gray-900 max-w-[120px] truncate">
+                    <td className="px-4 py-3 text-sm font-semibold text-goodwill-dark max-w-[120px] truncate">
                       {credential.candidate_name}
                     </td>
-                    <td className="px-3 py-2 text-xs text-gray-700 hidden md:table-cell max-w-[100px] truncate">
+                    <td className="px-4 py-3 text-sm text-goodwill-text hidden md:table-cell max-w-[100px] truncate">
                       {credential.position}
                     </td>
-                    <td className="px-3 py-2 text-xs text-gray-700 max-w-[100px] truncate">
+                    <td className="px-4 py-3 text-sm text-goodwill-text max-w-[100px] truncate">
                       {credential.credential_type}
                     </td>
-                    <td className="px-3 py-2 text-xs text-gray-700 hidden lg:table-cell">
+                    <td className="px-4 py-3 text-sm text-goodwill-text hidden lg:table-cell">
                       {credential.issue_date
                         ? new Date(credential.issue_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                         : '-'}
                     </td>
-                    <td className="px-3 py-2 text-xs text-gray-700">
+                    <td className="px-4 py-3 text-sm text-goodwill-text font-medium">
                       {credential.expiry_date
                         ? new Date(credential.expiry_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                         : '-'}
                     </td>
-                    <td className="px-3 py-2 text-xs text-gray-700 hidden lg:table-cell max-w-[120px] truncate">
+                    <td className="px-4 py-3 text-sm text-goodwill-text hidden lg:table-cell max-w-[120px] truncate">
                       {credential.email}
                     </td>
-                    <td className="px-3 py-2 text-xs hidden xl:table-cell">
+                    <td className="px-4 py-3 hidden xl:table-cell">
                       {credential.document_url ? (
-                        <div className="flex items-center gap-2">
-                          <a
-                            href={credential.document_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition-all"
-                            title="View Document"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                          </a>
-                          <a
-                            href={credential.document_url}
-                            download
-                            className="p-1.5 bg-purple-500 text-white rounded hover:bg-purple-600 transition-all"
-                            title="Download Document"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                          </a>
+                        <div className="inline-flex items-center gap-2 px-3 py-2 bg-goodwill-light rounded-xl border-2 border-goodwill-primary/20 hover:border-goodwill-primary/40 shadow-soft hover:shadow-medium transition-all duration-300 group">
+                          <div className="flex items-center gap-2">
+                            <div className="p-2 bg-gradient-to-br from-goodwill-primary/25 to-goodwill-primary/20 rounded-lg group-hover:from-goodwill-primary/35 group-hover:to-goodwill-primary/25 transition-all duration-300 border border-goodwill-primary/30 shadow-sm">
+                              <FileText className="w-4 h-4 text-goodwill-primary" strokeWidth={3} />
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <a
+                                href={credential.document_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2 bg-white border-2 border-goodwill-primary rounded-lg hover:bg-goodwill-primary/10 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 flex items-center justify-center"
+                                title="View Document"
+                              >
+                                <FileText className="w-3.5 h-3.5 text-goodwill-primary" strokeWidth={2.5} />
+                              </a>
+                              <a
+                                href={credential.document_url}
+                                download
+                                className="p-2 bg-white border-2 border-goodwill-primary rounded-lg hover:bg-goodwill-primary/10 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 flex items-center justify-center"
+                                title="Download Document"
+                              >
+                                <Download className="w-3.5 h-3.5 text-goodwill-primary" strokeWidth={2.5} />
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       ) : (
-                        <span className="text-gray-400">—</span>
+                        <span className="text-goodwill-text-muted text-sm">—</span>
                       )}
                     </td>
-                    <td className="px-3 py-2 text-xs">
+                    <td className="px-4 py-3 text-sm">
                       <StatusTag status={credential.status} expiryDate={credential.expiry_date} />
                     </td>
-                    <td className="px-3 py-2 text-right text-xs font-medium">
+                    <td className="px-4 py-3 text-right text-sm font-medium">
                       {isAdmin && (
-                        <div className="flex justify-end gap-1">
+                        <div className="flex justify-end gap-2">
                           <button
                             onClick={() => handleEdit(credential)}
-                            className="p-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition-all"
+                            className="p-2 bg-goodwill-primary text-white rounded-xl hover:bg-goodwill-primary/90 transition-all duration-200 shadow-soft hover:shadow-medium"
                             title="Edit"
                           >
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                              />
-                            </svg>
+                            <Edit className="w-4 h-4 text-white" strokeWidth={2} />
                           </button>
                           <button
                             onClick={() => handleDelete(credential.id)}
                             disabled={deletingId === credential.id}
-                            className="p-1.5 bg-red-500 text-white rounded hover:bg-red-600 transition-all disabled:opacity-50"
+                            className="p-2 bg-goodwill-secondary text-white rounded-xl hover:bg-goodwill-secondary/90 transition-all duration-200 disabled:opacity-50 shadow-soft hover:shadow-medium"
                             title="Delete"
                           >
                             {deletingId === credential.id ? (
-                              <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                             ) : (
-                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                />
-                              </svg>
+                              <Trash2 className="w-4 h-4 text-white" strokeWidth={2} />
                             )}
                           </button>
                         </div>
@@ -498,23 +514,23 @@ const Dashboard = () => {
 
       {/* Pagination controls */}
       {!loading && !error && filteredCredentials.length > 0 && (
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-indigo-50 rounded-2xl shadow-lg">
-          <div className="text-sm font-semibold text-gray-700 bg-white/80 px-4 py-2 rounded-xl shadow-sm">
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-goodwill-light rounded-2xl shadow-lg border border-goodwill-border">
+          <div className="text-sm font-semibold text-goodwill-dark bg-white/80 px-4 py-2 rounded-xl shadow-sm">
             📄 Page {pagination.current_page} of {pagination.last_page} • {pagination.total} total
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setPage(Math.max(1, page - 1))}
               disabled={page <= 1}
-              className="px-4 py-2 rounded-xl bg-blue-500 text-white font-semibold hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all disabled:hover:scale-100"
+              className="px-4 py-2 rounded-xl bg-goodwill-primary text-white font-semibold hover:bg-goodwill-primary/90 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all disabled:hover:scale-100"
             >
               ← Prev
             </button>
-            <span className="px-4 py-2 text-sm font-bold text-gray-700 bg-white rounded-xl shadow-sm">Page {page}</span>
+            <span className="px-4 py-2 text-sm font-bold text-goodwill-dark bg-white rounded-xl shadow-sm">Page {page}</span>
             <button
               onClick={() => setPage(Math.min(pagination.last_page || page + 1, page + 1))}
               disabled={pagination.last_page ? page >= pagination.last_page : true}
-              className="px-4 py-2 rounded-xl bg-purple-500 text-white font-semibold hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all disabled:hover:scale-100"
+              className="px-4 py-2 rounded-xl bg-goodwill-secondary text-white font-semibold hover:bg-goodwill-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all disabled:hover:scale-100"
             >
               Next →
             </button>
@@ -524,7 +540,7 @@ const Dashboard = () => {
                 setPerPage(Number(e.target.value));
                 setPage(1);
               }}
-              className="ml-2 px-3 py-2 border-0 bg-white rounded-xl text-sm font-semibold text-gray-700 shadow-sm focus:ring-2 focus:ring-purple-500"
+              className="ml-2 px-3 py-2 border-0 bg-white rounded-xl text-sm font-semibold text-goodwill-dark shadow-sm focus:ring-2 focus:ring-goodwill-primary"
             >
               <option value={10}>10 / page</option>
               <option value={25}>25 / page</option>

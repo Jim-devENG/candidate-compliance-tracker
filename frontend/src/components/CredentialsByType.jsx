@@ -10,37 +10,40 @@ const CredentialsByType = ({ credentials }) => {
     .slice(0, 5); // Top 5
 
   const colors = [
-    'bg-blue-500',
-    'bg-purple-500',
-    'bg-pink-500',
-    'bg-indigo-500',
-    'bg-cyan-500',
+    { bg: 'bg-blue-500', text: 'text-blue-600' },
+    { bg: 'bg-purple-500', text: 'text-purple-600' },
+    { bg: 'bg-indigo-500', text: 'text-indigo-600' },
+    { bg: 'bg-teal-500', text: 'text-teal-600' },
+    { bg: 'bg-cyan-500', text: 'text-cyan-600' },
   ];
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-      <h3 className="text-lg font-bold text-gray-900 mb-4">Top Credential Types</h3>
+    <div className="bg-goodwill-light rounded-2xl p-6 shadow-soft border border-goodwill-border">
+      <h3 className="text-lg font-bold text-goodwill-dark mb-5">Top Credential Types</h3>
       {sortedTypes.length === 0 ? (
-        <p className="text-sm text-gray-500">No credentials yet</p>
+        <p className="text-sm text-goodwill-text-muted">No credentials yet</p>
       ) : (
-        <div className="space-y-3">
-          {sortedTypes.map(([type, count], index) => (
-            <div key={type} className="flex items-center gap-3">
-              <div className={`${colors[index % colors.length]} w-3 h-3 rounded-full`}></div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-gray-700">{type}</span>
-                  <span className="text-sm font-bold text-gray-900">{count}</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className={`${colors[index % colors.length]} h-2 rounded-full transition-all duration-500`}
-                    style={{ width: `${(count / credentials.length) * 100}%` }}
-                  ></div>
+        <div className="space-y-4">
+          {sortedTypes.map(([type, count], index) => {
+            const colorScheme = colors[index % colors.length];
+            return (
+              <div key={type} className="flex items-center gap-3">
+                <div className={`${colorScheme.bg} w-3 h-3 rounded-full shadow-sm`}></div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className={`text-sm font-semibold ${colorScheme.text}`}>{type}</span>
+                    <span className={`text-sm font-bold ${colorScheme.text}`}>{count}</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2 shadow-inner">
+                    <div
+                      className={`${colorScheme.bg} h-2 rounded-full transition-all duration-500 shadow-sm`}
+                      style={{ width: `${(count / credentials.length) * 100}%` }}
+                    ></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

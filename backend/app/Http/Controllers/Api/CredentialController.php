@@ -24,14 +24,20 @@ class CredentialController extends Controller
         }
         // Admins can see all credentials
 
-        // Filter by candidate name
+        // Filter by candidate name (sanitized to prevent SQL injection)
         if ($request->has('name')) {
-            $query->where('candidate_name', 'like', '%' . $request->input('name') . '%');
+            $name = $request->input('name');
+            // Eloquent automatically escapes LIKE queries, but we'll sanitize for extra safety
+            $name = str_replace(['%', '_'], ['\%', '\_'], $name); // Escape LIKE wildcards
+            $query->where('candidate_name', 'like', '%' . $name . '%');
         }
 
-        // Filter by credential type
+        // Filter by credential type (sanitized to prevent SQL injection)
         if ($request->has('type')) {
-            $query->where('credential_type', 'like', '%' . $request->input('type') . '%');
+            $type = $request->input('type');
+            // Eloquent automatically escapes LIKE queries, but we'll sanitize for extra safety
+            $type = str_replace(['%', '_'], ['\%', '\_'], $type); // Escape LIKE wildcards
+            $query->where('credential_type', 'like', '%' . $type . '%');
         }
 
         // Pagination

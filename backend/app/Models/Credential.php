@@ -101,11 +101,38 @@ class Credential extends Model
         if (!$this->document_path) {
             return null;
         }
-        $relativeUrl = \Illuminate\Support\Facades\Storage::url($this->document_path);
-        $base = rtrim(config('app.url', ''), '/');
-        if ($base) {
-            return $base . $relativeUrl;
+        
+        // Get the storage URL (may be relative or absolute depending on config)
+        $storageUrl = \Illuminate\Support\Facades\Storage::disk('public')->url($this->document_path);
+        
+        // If Storage::url already returns a full URL, use it directly
+        if (str_starts_with($storageUrl, 'http://') || str_starts_with($storageUrl, 'https://')) {
+            return $storageUrl;
         }
-        return $relativeUrl;
+        
+        // Get the base URL from request if available (for production), otherwise use config
+        $baseUrl = null;
+        try {
+            // Try to get URL from current request (works in HTTP context)
+            if (app()->runningInConsole() === false && request()) {
+                $baseUrl = request()->getSchemeAndHttpHost();
+            }
+        } catch (\Exception $e) {
+            // Fall back to config if request is not available
+        }
+        
+        // Fall back to config if we couldn't get it from request
+        if (!$baseUrl) {
+            $baseUrl = rtrim(config('app.url', 'http://localhost:8000'), '/');
+        }
+        
+        // Ensure storage path starts with / if it doesn't already
+        $storagePath = $storageUrl;
+        if (!str_starts_with($storagePath, '/')) {
+            $storagePath = '/' . $storagePath;
+        }
+        
+        // Construct full URL
+        return $baseUrl . $storagePath;
     }
 }

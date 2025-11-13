@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { LayoutDashboard } from 'lucide-react';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -7,38 +8,38 @@ const Sidebar = () => {
     {
       name: 'Dashboard',
       path: '/',
-      icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      ),
+      icon: <LayoutDashboard className="w-5 h-5 text-current" strokeWidth={2} />,
     },
   ];
 
   return (
-    <div className="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen border-r border-gray-800">
-      <div className="p-6">
-        <div className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg" />
+    <div className="w-64 min-h-screen border-r border-blue-700/30 shadow-large" style={{ background: 'linear-gradient(to bottom, #02646f, #02646f, #015a64)' }}>
+      <div className="p-6 border-b border-white/10">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-xl bg-white/20 backdrop-blur-sm shadow-medium flex items-center justify-center border border-white/30">
+            <LayoutDashboard className="w-5 h-5 text-white" strokeWidth={2.5} />
+          </div>
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Credential Tracker</h1>
-            <p className="text-gray-400 text-xs mt-0.5">Compliance Management</p>
+            <h1 className="text-lg font-bold tracking-tight text-white">Goodwill Staffing</h1>
+            <p className="text-white/80 text-xs mt-0.5 font-medium">Compliance Tracker</p>
           </div>
         </div>
       </div>
-      <nav className="mt-4">
+      <nav className="mt-6 px-3">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
             <Link
               key={item.path}
               to={item.path}
-              className={`mx-3 my-1 flex items-center px-4 py-2.5 rounded-lg text-gray-300 hover:bg-white/5 hover:text-white transition-all ${
-                isActive ? 'bg-white/10 text-white ring-1 ring-white/10' : ''
+              className={`flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                isActive 
+                  ? 'bg-white/20 backdrop-blur-sm text-white shadow-medium shadow-white/20 border border-white/30' 
+                  : 'text-white/80 hover:bg-white/10 hover:text-white'
               }`}
             >
               <span className="mr-3">{item.icon}</span>
-              <span className="text-sm">{item.name}</span>
+              <span>{item.name}</span>
             </Link>
           );
         })}

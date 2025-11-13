@@ -1,3 +1,121 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Goodwill Brand Colors - CSS Variables for direct use */
+:root {
+  --goodwill-primary: #02646f;
+  --goodwill-secondary: #e5482e;
+  --goodwill-light: #eefbfe;
+  --goodwill-dark: #1a1a1a;
+  --goodwill-text: #1a1a1a;
+  --goodwill-text-muted: #4a5568;
+  --goodwill-border: #d1e7f0;
+}
+
+/* Force background colors on body and root */
+body {
+  background-color: var(--goodwill-light) !important;
+  color: var(--goodwill-text) !important;
+}
+
+#root {
+  background-color: var(--goodwill-light) !important;
+  min-height: 100vh;
+}
+
+/* Ensure Tailwind classes are available - Force with !important */
+@layer utilities {
+  .bg-goodwill-primary {
+    background-color: var(--goodwill-primary) !important;
+  }
+  .bg-goodwill-secondary {
+    background-color: var(--goodwill-secondary) !important;
+  }
+  .bg-goodwill-light {
+    background-color: var(--goodwill-light) !important;
+  }
+  .text-goodwill-primary {
+    color: var(--goodwill-primary) !important;
+  }
+  .text-goodwill-secondary {
+    color: var(--goodwill-secondary) !important;
+  }
+  .text-goodwill-dark {
+    color: var(--goodwill-dark) !important;
+  }
+  .text-goodwill-text {
+    color: var(--goodwill-text) !important;
+  }
+  .text-goodwill-text-muted {
+    color: var(--goodwill-text-muted) !important;
+  }
+  .border-goodwill-primary {
+    border-color: var(--goodwill-primary) !important;
+  }
+  .border-goodwill-secondary {
+    border-color: var(--goodwill-secondary) !important;
+  }
+  .border-goodwill-border {
+    border-color: var(--goodwill-border) !important;
+  }
+  
+  /* Handle opacity variants */
+  .bg-goodwill-primary\/10 {
+    background-color: rgba(2, 100, 111, 0.1) !important;
+  }
+  .bg-goodwill-primary\/20 {
+    background-color: rgba(2, 100, 111, 0.2) !important;
+  }
+  .bg-goodwill-primary\/30 {
+    background-color: rgba(2, 100, 111, 0.3) !important;
+  }
+  .bg-goodwill-primary\/80 {
+    background-color: rgba(2, 100, 111, 0.8) !important;
+  }
+  .bg-goodwill-primary\/90 {
+    background-color: rgba(2, 100, 111, 0.9) !important;
+  }
+  .bg-goodwill-secondary\/10 {
+    background-color: rgba(229, 72, 46, 0.1) !important;
+  }
+  .bg-goodwill-secondary\/20 {
+    background-color: rgba(229, 72, 46, 0.2) !important;
+  }
+  .bg-goodwill-secondary\/30 {
+    background-color: rgba(229, 72, 46, 0.3) !important;
+  }
+  .bg-goodwill-secondary\/80 {
+    background-color: rgba(229, 72, 46, 0.8) !important;
+  }
+  .bg-goodwill-secondary\/90 {
+    background-color: rgba(229, 72, 46, 0.9) !important;
+  }
+  .bg-goodwill-light\/30 {
+    background-color: rgba(238, 251, 254, 0.3) !important;
+  }
+  .bg-goodwill-light\/50 {
+    background-color: rgba(238, 251, 254, 0.5) !important;
+  }
+  .bg-goodwill-light\/80 {
+    background-color: rgba(238, 251, 254, 0.8) !important;
+  }
+  .bg-goodwill-light\/95 {
+    background-color: rgba(238, 251, 254, 0.95) !important;
+  }
+  .border-goodwill-primary\/20 {
+    border-color: rgba(2, 100, 111, 0.2) !important;
+  }
+  .border-goodwill-primary\/30 {
+    border-color: rgba(2, 100, 111, 0.3) !important;
+  }
+  .border-goodwill-primary\/50 {
+    border-color: rgba(2, 100, 111, 0.5) !important;
+  }
+  .border-goodwill-secondary\/20 {
+    border-color: rgba(229, 72, 46, 0.2) !important;
+  }
+  .border-goodwill-secondary\/30 {
+    border-color: rgba(229, 72, 46, 0.3) !important;
+  }
+}

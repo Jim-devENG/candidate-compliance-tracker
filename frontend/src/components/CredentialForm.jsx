@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
 import api from '../config/api';
 
 const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
@@ -92,44 +93,42 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={loading ? undefined : onClose} />
       <div className="relative h-full w-full flex items-center justify-center p-4">
-        <div className="bg-white/90 border border-gray-200 rounded-lg shadow-2xl max-w-lg w-full mx-auto">
+        <div className="bg-goodwill-light/95 border border-goodwill-border rounded-lg shadow-2xl max-w-lg w-full mx-auto">
           <div className="relative overflow-hidden rounded-t-lg">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-10" />
             <div className="px-3 pt-2.5 pb-2 flex items-start justify-between">
               <div>
-                <h2 className="text-base font-bold text-gray-900 tracking-tight">
+                <h2 className="text-base font-bold text-goodwill-dark tracking-tight">
                   {credential ? 'Edit Credential' : 'Add New Credential'}
                 </h2>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs text-goodwill-text-muted mt-0.5">
                   Provide candidate and credential details.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center justify-center h-6 w-6 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center justify-center h-6 w-6 rounded-lg border border-goodwill-border text-goodwill-text hover:bg-goodwill-light transition-colors"
                 disabled={loading}
                 aria-label="Close"
               >
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="w-3.5 h-3.5 text-goodwill-text" strokeWidth={2.5} />
               </button>
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="p-3">
           {error && (
-            <div className="mb-2 p-2 text-xs bg-red-50 border border-red-200 text-red-800 rounded">
+            <div className="mb-2 p-2 text-xs bg-goodwill-secondary/10 border border-goodwill-secondary/30 text-goodwill-dark rounded">
               {error}
             </div>
           )}
 
             {/* Candidate */}
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Candidate</h3>
+            <h3 className="text-xs font-semibold text-goodwill-text-muted uppercase tracking-wider mb-2">Candidate</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">
                 Candidate Name *
               </label>
               <input
@@ -138,24 +137,24 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
                 value={formData.candidate_name}
                 onChange={handleChange}
                 required
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">Position *</label>
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">Position *</label>
               <input
                 type="text"
                 name="position"
                 value={formData.position}
                 onChange={handleChange}
                 required
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">
                 Credential Type *
               </label>
               <input
@@ -164,19 +163,19 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
                 value={formData.credential_type}
                 onChange={handleChange}
                 required
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">Email *</label>
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">Email *</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
             </div>
             </div>
@@ -185,19 +184,19 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Dates & Status</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-3">
               <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">Issue Date *</label>
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">Issue Date *</label>
               <input
                 type="date"
                 name="issue_date"
                 value={formData.issue_date}
                 onChange={handleChange}
                 required
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">Expiry Date *</label>
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">Expiry Date *</label>
               <input
                 type="date"
                 name="expiry_date"
@@ -205,19 +204,19 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
                 onChange={handleChange}
                 required
                 min={formData.issue_date}
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-0.5">
-                Status <span className="text-xs text-gray-500">(Optional)</span>
+              <label className="block text-xs font-medium text-goodwill-dark mb-0.5">
+                Status <span className="text-xs text-goodwill-text-muted">(Optional)</span>
               </label>
               <select
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 py-1.5 text-sm rounded-lg border border-goodwill-border bg-white text-goodwill-dark focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               >
                 <option value="">Auto-calculate</option>
                 <option value="active">Active</option>
@@ -238,16 +237,16 @@ const CredentialForm = ({ isOpen, onClose, credential, onSuccess }) => {
                 type="file"
                 accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 onChange={(e) => setDocumentFile(e.target.files?.[0] || null)}
-                className="w-full px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-2 py-1.5 text-xs rounded-lg border border-goodwill-border bg-white focus:ring-2 focus:ring-goodwill-primary focus:border-goodwill-primary"
               />
-              <p className="text-xs text-gray-500 mt-1">PDF, DOC, DOCX. Max 5MB.</p>
+              <p className="text-xs text-goodwill-text-muted mt-1">PDF, DOC, DOCX. Max 5MB.</p>
             </div>
 
             <div className="mt-3 flex items-center justify-end gap-2">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-3 py-1.5 text-sm rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+                className="px-3 py-1.5 text-sm rounded-lg border border-goodwill-border text-goodwill-dark hover:bg-goodwill-light transition-colors"
                 disabled={loading}
               >
                 Cancel

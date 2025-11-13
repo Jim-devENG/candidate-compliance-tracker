@@ -14,6 +14,17 @@ class UpdateCredentialRequest extends FormRequest
         if ($this->has('status') && $this->input('status') === '') {
             $this->merge(['status' => null]);
         }
+        
+        // Sanitize string inputs to prevent XSS
+        $stringFields = ['candidate_name', 'position', 'credential_type', 'email'];
+        foreach ($stringFields as $field) {
+            if ($this->has($field)) {
+                $value = $this->input($field);
+                // Remove HTML tags and encode special characters
+                $sanitized = htmlspecialchars(strip_tags($value), ENT_QUOTES, 'UTF-8');
+                $this->merge([$field => $sanitized]);
+            }
+        }
     }
 
     /**
