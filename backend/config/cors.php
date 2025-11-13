@@ -25,7 +25,7 @@ return [
 
     'allowed_origins_patterns' => [
         // Development patterns (only in non-production)
-        ...(app()->environment('production') ? [] : [
+        ...(env('APP_ENV', 'local') === 'production' ? [] : [
             '#^http://localhost:\d+$#', // Allow any localhost port for development
             '#^http://127\.0\.0\.1:\d+$#', // Allow any 127.0.0.1 port for development
             '#^http://192\.168\.\d+\.\d+:\d+$#', // Allow any local network IP (192.168.x.x)

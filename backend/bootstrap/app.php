@@ -35,14 +35,12 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Production error handling
-        if (app()->environment('production')) {
-            $exceptions->render(function (\Illuminate\Validation\ValidationException $e, $request) {
-                if ($request->is('api/*')) {
-                    return response()->json([
-                        'message' => 'The given data was invalid.',
-                        'errors' => $e->errors(),
-                    ], 422);
-                }
-            });
-        }
+        $exceptions->render(function (\Illuminate\Validation\ValidationException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => 'The given data was invalid.',
+                    'errors' => $e->errors(),
+                ], 422);
+            }
+        });
     })->create();

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', app()->environment('production') 
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', env('APP_ENV', 'local') === 'production'
         ? Sanctum::currentApplicationUrlWithPort()
         : sprintf(
             '%s%s',

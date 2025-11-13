@@ -109,16 +109,18 @@ const Dashboard = () => {
   };
 
   const handleSendReminders = async () => {
-    if (!window.confirm('Send reminder emails to credential managers (30, 14, and 7 days before expiry)?')) {
+    if (!window.confirm('Send reminder emails to ALL candidates with expiry dates? This will notify all credential managers about their candidates\' upcoming expirations.')) {
       return;
     }
 
     setSendingEmails(prev => ({ ...prev, reminders: true }));
     try {
-      const response = await api.post('/emails/send-reminders');
+      const response = await api.post('/emails/send-reminders', {
+        send_to_all: true // Explicitly send to all candidates
+      });
       setEmailResult({
         success: true,
-        message: 'Reminder emails sent successfully!',
+        message: 'Reminder emails sent to all candidates successfully!',
         total_sent: response.data.total_sent,
         errors: response.data.errors || [],
       });

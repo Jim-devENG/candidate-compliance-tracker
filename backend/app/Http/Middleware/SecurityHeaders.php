@@ -28,7 +28,7 @@ class SecurityHeaders
         $response->headers->remove('Server');
 
         // HTTPS enforcement in production
-        if (app()->environment('production')) {
+        if (config('app.env') === 'production') {
             $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
             
             // Content Security Policy
