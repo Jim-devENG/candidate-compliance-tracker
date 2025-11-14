@@ -241,6 +241,15 @@ powershell -ExecutionPolicy Bypass -File add-super-admin-key.ps1
 
 This will automatically generate and add `SUPER_ADMIN_SECRET_KEY` to `backend/.env`. This key is required for creating the first super admin account.
 
+**To view the secret key later:**
+```bash
+# Windows
+show-super-admin-key.bat
+
+# Or PowerShell
+powershell -ExecutionPolicy Bypass -File show-super-admin-key.ps1
+```
+
 See [SUPER_ADMIN_CREATION.md](SUPER_ADMIN_CREATION.md) for detailed information.
 
 ---
