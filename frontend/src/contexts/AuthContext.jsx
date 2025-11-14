@@ -310,7 +310,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     updateProfile,
     refreshUser,
-    isAdmin: user?.role === 'admin',
+    isSuperAdmin: user?.role === 'super_admin',
+    isAdmin: user?.role === 'admin' || user?.role === 'super_admin',
     isRecruiter: user?.role === 'recruiter',
   };
 

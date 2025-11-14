@@ -361,15 +361,15 @@ const Dashboard = () => {
       {/* Data Table */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-goodwill-border/50 animate-scale-in">
         {loading ? (
-          <div className="p-12 text-center bg-goodwill-light/50">
-            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-goodwill-primary border-t-transparent animate-glow"></div>
-            <p className="mt-4 text-goodwill-dark font-semibold animate-pulse">Loading credentials...</p>
+          <div className="p-8 text-center bg-goodwill-light/50">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-goodwill-primary border-t-transparent animate-glow"></div>
+            <p className="mt-3 text-xs text-goodwill-dark font-medium animate-pulse">Loading credentials...</p>
           </div>
         ) : error ? (
           <div className="p-8 text-center bg-goodwill-secondary/10 text-goodwill-dark font-semibold rounded-2xl border border-goodwill-secondary/30">{error}</div>
         ) : credentials.length === 0 ? (
-          <div className="p-12 text-center bg-goodwill-light/30">
-            <p className="text-goodwill-dark font-semibold">No credentials found. Click "Add New Credential" to get started.</p>
+          <div className="p-8 text-center bg-goodwill-light/30">
+            <p className="text-xs text-goodwill-dark font-medium">No credentials found. Click "Add New Credential" to get started.</p>
           </div>
         ) : (
           <div className="overflow-x-auto max-w-full">

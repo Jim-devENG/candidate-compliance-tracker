@@ -27,6 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Register custom middleware aliases
         $middleware->alias([
             'role.admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'role.super_admin' => \App\Http\Middleware\EnsureUserIsSuperAdmin::class,
             'role.recruiter' => \App\Http\Middleware\EnsureUserIsRecruiter::class,
         ]);
         

@@ -1,15 +1,24 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, Users, Shield } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Sidebar = () => {
   const location = useLocation();
+  const { isSuperAdmin } = useAuth();
 
   const menuItems = [
     {
       name: 'Dashboard',
-      path: '/',
+      path: '/dashboard',
       icon: <LayoutDashboard className="w-5 h-5 text-current" strokeWidth={2} />,
     },
+    ...(isSuperAdmin ? [
+      {
+        name: 'User Management',
+        path: '/admin/users',
+        icon: <Users className="w-5 h-5 text-current" strokeWidth={2} />,
+      },
+    ] : []),
   ];
 
   return (

@@ -237,7 +237,7 @@ const Profile = () => {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-goodwill-primary to-goodwill-accent">
-                          <span className="text-xl font-bold text-white">
+                          <span className="text-lg font-bold text-white">
                             {user.name?.charAt(0).toUpperCase() || 'U'}
                           </span>
                         </div>

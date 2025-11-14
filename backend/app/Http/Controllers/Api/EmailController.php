@@ -119,8 +119,8 @@ class EmailController extends Controller
             ->orderBy('expiry_date', 'asc')
             ->get();
 
-        // Find admin users
-        $admins = User::where('role', 'admin')->get();
+        // Find admin and super_admin users
+        $admins = User::whereIn('role', ['admin', 'super_admin'])->get();
 
         if ($admins->isEmpty()) {
             return response()->json([

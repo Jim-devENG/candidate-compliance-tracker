@@ -24,7 +24,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['sometimes', 'string', 'in:admin,recruiter'],
+            'role' => ['sometimes', 'string', 'in:admin,recruiter'], // super_admin cannot be created via regular registration
             'avatar' => ['sometimes', 'file', 'image', 'max:2048'], // 2MB
         ]);
 

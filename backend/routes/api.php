@@ -24,6 +24,11 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']
 Route::post('/forgot-password', [\App\Http\Controllers\Api\AuthController::class, 'forgotPassword'])->middleware('throttle:3,1'); // 3 requests per minute
 Route::post('/reset-password', [\App\Http\Controllers\Api\AuthController::class, 'resetPassword'])->middleware('throttle:3,1'); // 3 requests per minute
 
+// Super admin creation (special endpoint)
+// - If no super admin exists: requires secret key (public endpoint)
+// - If super admin exists: requires super admin authentication (protected)
+Route::post('/super-admin/create', [\App\Http\Controllers\Api\SuperAdminController::class, 'createSuperAdmin'])->middleware('throttle:3,1'); // 3 requests per minute
+
 // Protected routes with rate limiting
 Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () { // 60 requests per minute for authenticated users
     // Authentication routes
@@ -46,6 +51,14 @@ Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () { // 60 
         // Email trigger routes with stricter rate limiting
         Route::post('/emails/send-reminders', [\App\Http\Controllers\Api\EmailController::class, 'sendReminders'])->middleware('throttle:10,1'); // 10 requests per minute
         Route::post('/emails/send-summary', [\App\Http\Controllers\Api\EmailController::class, 'sendSummary'])->middleware('throttle:10,1'); // 10 requests per minute
+        
+        // Admin user management routes (super_admin only)
+        Route::middleware('role.super_admin')->group(function () {
+            Route::get('/admin/users', [\App\Http\Controllers\Api\AdminController::class, 'getUsers']);
+            Route::post('/admin/users', [\App\Http\Controllers\Api\AdminController::class, 'createUser']);
+            Route::put('/admin/users/{id}', [\App\Http\Controllers\Api\AdminController::class, 'updateUser']);
+            Route::delete('/admin/users/{id}', [\App\Http\Controllers\Api\AdminController::class, 'deleteUser']);
+        });
     });
 });
 
