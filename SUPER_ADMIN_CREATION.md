@@ -4,6 +4,13 @@
 
 Super Admin accounts have a **special creation process** that is different from regular user registration. This ensures security and proper access control.
 
+**Super Admin** is the highest level of access in the system:
+- Can create and manage admin accounts
+- Can create and manage recruiter accounts  
+- Can create additional super admin accounts
+- Full access to User Management panel
+- All admin privileges plus user management capabilities
+
 ## Two Methods for Creating Super Admin
 
 ### Method 1: First Super Admin (Secret Key)

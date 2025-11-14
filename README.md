@@ -40,7 +40,7 @@ A comprehensive, production-ready full-stack web application for managing candid
 - ✅ **Credential Management** - Full CRUD operations for candidate credentials
 - ✅ **Automatic Status Tracking** - Real-time status calculation (Active/Expiring Soon/Expired)
 - ✅ **Email Reminders** - Automated reminders at 30, 14, and 7 days before expiry
-- ✅ **Role-Based Access Control** - Admin and Recruiter roles with different permissions
+- ✅ **Role-Based Access Control** - Super Admin, Admin, and Recruiter roles with hierarchical permissions
 - ✅ **Document Management** - Upload and manage credential documents (PDF/DOC)
 - ✅ **Dashboard Analytics** - Visual statistics and charts for credential overview
 - ✅ **Export Functionality** - CSV export for credential data
@@ -455,12 +455,23 @@ Authorization: Bearer {token}
 
 ### User Roles
 
+#### Super Admin
+- ✅ Full access to all features
+- ✅ Can create, edit, and delete any credential
+- ✅ Can create and manage admin and recruiter accounts
+- ✅ Can create additional super admin accounts
+- ✅ Can trigger email reminders and summaries
+- ✅ Receives daily summary emails
+- ✅ Access to User Management panel
+
 #### Admin
 - ✅ Full CRUD access to all credentials
 - ✅ Can create, edit, and delete any credential
 - ✅ Can view all credentials
 - ✅ Can trigger email reminders and summaries
 - ✅ Receives daily summary emails
+- ❌ Cannot create admin or super admin accounts
+- ❌ Cannot access User Management panel
 
 #### Recruiter
 - ✅ Can view their own credentials only
